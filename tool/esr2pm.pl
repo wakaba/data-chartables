@@ -23,11 +23,11 @@ while (<>) {
       $section = $1;
     } elsif (/^\t(.*)$/) {
       my $l = $1;
-      if ($section == 'Encode' || $section == 'Decode' || $section == 'Cversion') {
+      if ($section =~ /^(?:En|De)code/ || $section == 'Cversion') {
         if ($l =~ /^->(.+):C$/) {
           my $name = $1;
           if ($name eq 'iso2022') {
-            $l = q($s = Encode::ISO2022::internal_to_iso2022 ($s, $C););
+            $l = q(($s, %s) = Encode::ISO2022::internal_to_iso2022 ($s, $C););
           } elsif ($name eq 'sjis') {
             $l = q($s = Encode::SJIS::internal_to_sjis ($s, $C););
           }
@@ -49,7 +49,7 @@ while (<>) {
           $l = qq(Encode::_utf8_o$1 (\$s););
         } elsif ($l =~ /^C:([GC][^=:]+)=([^:]+):([^\t]+)(\t\s*\#\#.+)?$/) {
           $l = qq(\$C->{$1} = \$Encode::Charset::CHARSET{$2}->{'$3'};$4);
-        } elsif ($l =~ /^C:option:([^=]+)=(.+)(\s+\#\#.+)?$/) {
+        } elsif ($l =~ /^C:option:([^=]+)=([^\t]+?)(\t\s*\#\#.+)?$/) {
           $l = qq(\$C->{option}->$1 = $2;$3);
         } elsif ($l =~ /^C:designate:\*:default=(-?[0-3]+)$/) {
           $l = qq(\$C->{option}->{designate_to}->{G94}->{default} = $1;\n).
@@ -76,14 +76,14 @@ while (<>) {
                qq(    \$C->{option}->{designate_to}->{\$c}->{'\x23'.\$F} = $1;\n).
                qq(  }\n);
                qq(});
-        } elsif ($l =~ /^C:designate:([^:=]+):([^=]+)=(-?[0-3]+)(\s+\#\#.+)?$/) {
+        } elsif ($l =~ /^C:designate:([^:=]+):([^=]+)=(-?[0-3]+)(\t\s*\#\#.+)?$/) {
           $l = qq(\$C->{option}->{designate_to}->{$1}->{'$2'} = $3;$4);
-        } elsif ($l =~ /^C:([GC][LR])=undef$/) {
-          $l = qq(\$C->{$1} = undef;);
-        } elsif ($l =~ /^C:([GC][LR])=(..)$/) {
-          $l = qq(\$C->{$1} = '$2';);
-        } elsif ($l =~ /^C:bit=([78])$/) {
-          $l = qq(\$C->{bit} = $1;);
+        } elsif ($l =~ /^C:([GC][LR])=undef(\t\s*\#\#.+)?$/) {
+          $l = qq(\$C->{$1} = undef;$3);
+        } elsif ($l =~ /^C:([GC][LR])=(..)(\t\s*\#\#.+)?$/) {
+          $l = qq(\$C->{$1} = '$2';$3);
+        } elsif ($l =~ /^C:bit=([78])(\t\s*\#\#.+)?$/) {
+          $l = qq(\$C->{bit} = $1;$2);
         } elsif ($l =~ /^use:table:(.+)$/) {
           $l = qq(eval q(use Encode::Table::$1) unless \$Encode::Table::$1::VERSION;);
         } elsif ($l =~ /^require:private:(.+)$/) {
@@ -149,8 +149,10 @@ $Info{'POD:ENCODING:PREAMBLE'}
 EOH
 
 for my $encode (@{ $Info{encoding} }) {
-  for my $ED (qw/Encode Decode Cversion/) {
-    my $ed = lc $ED;
+  $encode->{EncodeFull} = $encode->{'Encode:Prepare'}."\n".$encode->{Encode};
+  $encode->{DecodeFull} = $encode->{'Decode:Prepare'}."\n".$encode->{Decode};
+  for my $ED (qw/Encode Decode EncodeFull DecodeFull Cversion/) {
+    my $ed = $ED =~ /Encode/ ? 'encode' : 'decode';
     if ($encode->{$ED} =~ /Encode::Table/) {
       $encode->{$ED} = q/require Encode::Table;
 my $tbl = defined $obj->{_/.$ed.q/_mapping} ? $obj->{_/.$ed.q/_mapping} : 1;
@@ -159,7 +161,15 @@ my %tblopt = (-autoload => defined $obj->{_/.$ed.q/_mapping_autoload} ? $obj->{_
     }
     if ($encode->{$ED} =~ /\$C/) {
       if ($ED ne 'Cversion' && $encode->{Cversion}) {
-        $encode->{$ED} = qq(my \$C = \$obj->__code_version;\n).$encode->{$ED};
+        $encode->{$ED} = ($ED =~ /Full/ ? qq(my \$C = \$obj->__code_version;\n) : '')
+                        .qq(\$C->{_encoder} = \$obj;\n)
+                        .($ED eq 'EncodeFull' ? qq(\$C->{option}->{fallback_from_ucs} = \$obj->{_encode_fallback} ? \$obj->{_encode_fallback} :
+  \$chk & Encode::DIE_ON_ERR ? 'croak' :
+  \$chk & Encode::FB_WARN ? 'quiet+warn' : \$chk & Encode::RETURN_ON_ERR ? 'quiet' :
+  \$chk & Encode::PERLQQ ? 'perl' :        \$chk & Encode::HTMLCREF ? 'sgml' :
+  \$chk & Encode::XMLCREF ? 'sgml-hex' : 'replacement';
+) : '')
+                        .$encode->{$ED};
       } elsif ($encode->{$ED} =~ /SJIS/i) {
         $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object_sjis;\n).$encode->{$ED};
       } else {
@@ -189,14 +199,37 @@ $encode->{Description}@{[ $encode->{Alias} ? '
 
 sub encode (\$\$;\$) {
   my (\$obj, \$s, \$chk) = \@_;
+  my \%s;
+  $encode->{EncodeFull}
+  if (\$s{die}) {	## FB_CROAK
+    if (\$Carp::VERSION) { Carp::croak ('encode: '.\$s{reason}) }
+    else { die ('encode: '.\$s{reason}) }
+  } elsif (\$s{halfway}) {	## FB_QUIET, FB_WARNING
+    \$_[1] = substr (\$_[1], \$s{converted_length});
+    if (\$s{warn}) {
+      if (\$Carp::VERSION) { Carp::carp ('encode: '.\$s{reason}) }
+      else { warn ('encode: '.\$s{reason}) }
+    }
+  } else {
+    \$_[1] = '' if \$chk;
+  }
+  return \$s;
+}
+
+sub _encode_internal (\$\$\$) {
+  my (\$obj, \$s, \$C) = \@_;
+  my \%s;
   $encode->{Encode}
-  \$_[1] = '' if \$chk;
+  if (\$s{die}) {
+    if (\$Carp::VERSION) { Carp::croak ('encode: '.\$s{reason}) }
+    else { die ('encode: '.\$s{reason}) }
+  }
   return \$s;
 }
 
 sub decode (\$\$;\$) {
   my (\$obj, \$s, \$chk) = \@_;
-  $encode->{Decode}
+  $encode->{DecodeFull}
   \$_[1] = '' if \$chk;
   return \$s;
 }
@@ -313,4 +346,4 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/12/12 07:45:17 $
+# $Date: 2002/12/14 11:02:25 $
