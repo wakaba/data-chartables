@@ -1,0 +1,10 @@
+#?PETBL/1.0
+#?o name="cp936-ms-2000"
+#?o ucm:code_set_alias="cp936-ms	ms936	windows936	windows-936	windows-936-2000"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp936-ms.tbr"
+0x80	U+20AC		# EURO SIGN
+## Source: 2000/08/26  21:00              196,642 c_936.nls
+#?o license="Public Domain"

@@ -1,0 +1,7 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp1251-ms-2000"
+#?o ucm:code_set_alias="cp1251-ms	ms1251	windows1251	windows-1251	ms-cyrl"
+## Source: 2000/08/26  21:00               66,082 c_1251.nls
+#?import src="cp1251-ms-1997.tbl"
+#?import src="fullwidth.tbl" except="3F"
+#?o license="Public Domain"

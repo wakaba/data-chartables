@@ -1,0 +1,8 @@
+#?o name="cp932-ms-1996"
+#?o ucm:code_set_alias="Windows-31J	Windows31J	csWindows31J"
+#?o ucm:mb_cur_max="2"
+#?o <-ucs-substition="0x3F"
+#?o ->ucs-substition="0x30FB"
+#?import src="cp932-ms.tbr"
+## Source: CP_932.NLS 408,546  96-09-05  11:11
+#?o license="Public Domain"

@@ -1,0 +1,7 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp1253-ms-2000"
+#?o ucm:code_set_alias="cp1253-ms	ms1253	windows1253	windows-1253	ms-greek"
+## Source: 2000/08/26  21:00               66,082 c_1253.nls
+#?import src="cp1253-ms-1997.tbl"
+#?import src="fullwidth.tbl" except="3F"
+#?o license="Public Domain"

@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp850-ms-1998"
+#?o ucm:code_set_alias="cp850-ms-2000	cp850-ms	ms850	windows850	windows-850"
+#?import src="cp850-ms.tbr"
+#?import src="fullwidth.tbr" except="3F"
+## Source: CP_850.NLS 8,648  98-06-12  20:01
+##         CP_850.NLS 8,648  00-06-08  17:00
+##         2000/08/26  21:00               66,594 c_850.nls
+#?o license="Public Domain"

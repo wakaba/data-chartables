@@ -1,0 +1,10 @@
+#?o name="cp949-ms-1996"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp949-ms.tbr"
+0x52	U+00AE	<-	# REGISTERED SIGN
+0xA2E6	U+003F	->	# QUESTION MARK
+0xA2E7	U+003F	->	# QUESTION MARK
+## Source: 529,478  96-07-03   2:25 CP_949.NLS
+#?o license="Public Domain"

@@ -1,0 +1,10 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp950-ms-2000"
+#?o ucm:code_set_alias="cp950-ms	ms950	windows950	windows-950	windows-950-2000"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp950-ms.tbr"
+0xA3E1	U+20AC		# EURO SIGN
+## Source: 2000/08/26  21:00              196,642 c_950.nls
+#?o license="Public Domain"

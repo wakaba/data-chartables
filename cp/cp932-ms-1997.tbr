@@ -1,0 +1,11 @@
+#?o name="cp932-ms-1997"
+#?o ucm:code_set_alias="cp932-ms"
+#?o ucm:code_set_alias="SJIS-CP932	MS932	ms-cp932	X-MS-CP932	X-SJIS-CP932	windows932	windows-932"
+#?o ucm:code_set_alias="mscode	sjis-ms"
+#?o ucm:mb_cur_max="2"
+#?o <-ucs-substition="0x3F"
+#?o ->ucs-substition="0x30FB"
+#?import src="cp932-ms.tbr"
+0x8394	U+3094	<-	# HIRAGANA LETTER VU
+## Source: CP_932.NLS 407,586  97-09-03  22:35
+#?o license="Public Domain"

@@ -1,0 +1,7 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp1258-ms-2000"
+#?o ucm:code_set_alias="cp1258-ms	ms1258	windows1258	windows-1258"
+## Source: 2000/08/26  21:00               66,082 c_1258.nls
+#?import src="cp1258-ms-1997.tbl"
+#?import src="fullwidth.tbl" except="3F"
+#?o license="Public Domain"

@@ -1,0 +1,8 @@
+#?o name="cp950-ms-1996"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp950-ms.tbr"
+0xA3E1	U+003F	->	# QUESTION MARK
+## Source: 486,850  96-10-25   4:58 CP_950.NLS
+#?o license="Public Domain"

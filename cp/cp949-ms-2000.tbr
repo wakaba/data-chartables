@@ -1,0 +1,11 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp949-ms-2000"
+#?o ucm:code_set_alias="cp949-ms	ms949	windows949	windows-949	windows-949-2000"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp949-ms.tbr"
+0xA2E6	U+20AC		# EURO SIGN
+0xA2E7	U+00AE		# REGISTERED SIGN
+## Source: 2000/08/26  21:00              196,642 c_949.nls
+#?o license="Public Domain"

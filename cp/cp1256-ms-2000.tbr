@@ -1,0 +1,6 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp1256-ms-2000"
+## Source: 2000/08/26  21:00               66,082 c_1256.nls
+#?import src="cp1256-ms-1998.tbl"
+0xED	U+06CC	<-	# ARABIC LETTER FARSI YEH
+#?o license="Public Domain"

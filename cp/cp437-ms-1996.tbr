@@ -1,0 +1,5 @@
+#?o name="cp437-ms-1996"
+#?o ucm:code_set_alias="cp437-ms	ms437	windows437	windows-437"
+#?import src="cp437-ms.tbr"
+## Source: CP_437.NLS 9,522  96-09-05  11:11
+#?o license="Public Domain"

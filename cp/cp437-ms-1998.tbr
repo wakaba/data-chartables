@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+#?o name="cp437-ms-1998"
+#?o ucm:code_set_alias="cp437-ms-2000	cp437-ms	ms437	windows437	windows-437"
+#?import src="cp437-ms.tbr"
+#?import src="fullwidth.tbr" except="3F"
+## Source: CP_437.NLS 8,648  98-06-12  20:01
+##         CP_437.NLS 8,648  00-06-08  17:00
+##         2000/08/26  21:00               66,594 c_437.nls
+#?o license="Public Domain"

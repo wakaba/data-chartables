@@ -1,0 +1,8 @@
+#?o name="cp936-ms-1997"
+#?o ucm:mb_cur_max="2"
+#?o ucm:uconv_class="\"MBCS\""
+#?o ucm:lead_bytes="\\x81"
+#?import src="cp936-ms.tbr"
+0x80	U+0080		# <control>
+## Source: 537,858  97-09-12   9:52 CP_936.NLS
+#?o license="Public Domain"
