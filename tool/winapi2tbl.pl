@@ -21,7 +21,7 @@ my %S_range = (
 	950	=> [0x40..0x7E,0xA1..0xFE],
 	1361	=> [0x31..0xFE],
 	20000	=> [0x21..0x7E,0xA1..0xFE],
-	20932	=> [0x21..0x7E,0xA1..0xFE],
+	20932	=> [0xA1..0xFE],
 	20936	=> [0xA1..0xFE],
 	20949	=> [0xA1..0xFE],
 );
@@ -49,7 +49,7 @@ sub NAME ($) {
 }
 
 my @hdr;
-
+print STDERR "Checking system version...\n";
 if (eval q{require Message::Field::UA}) {
   my $ua = new Message::Field::UA;
   $ua->add_our_name;
@@ -76,7 +76,7 @@ for my $F (0x00..0xFF) {	## one byte
   my $wc = "\x00" x 10;
   my $len = $M2W->Call ($CodePage, 0, $mb, length ($mb) => $wc, length ($wc));
   $wc = substr ($wc, 0, $len * 2);
-  if (length ($wc) > 2 && $wc ne "\x00\x00") {
+  if (length ($wc) >= 2 && $wc ne "\x00\x00") {
     $wc =~ s/(.)(.)/$2$1/gs;
     $wc =~ s/(.)/sprintf '%02X', ord $1/ges;
     $M2U{ $F } = hex $wc;
@@ -88,26 +88,12 @@ for my $S (@{$S_range{$CodePage} || [0x01..0xFF] }) {
   my $wc = "\x00" x 10;
   my $len = $M2W->Call ($CodePage, 0, $mb, length ($mb) => $wc, length ($wc));
   $wc = substr ($wc, 0, $len * 2);
-  if (length ($wc) > 2) {
+  if (length ($wc) >= 2) {
     $wc =~ s/(.)(.)/$2$1/gs;
     $wc =~ s/(.)/sprintf '%02X', ord $1/ges;
-    $M2U{ 0x100 * $F + $S } = hex $wc;
+    $M2U{ 0x100 * $F + $S } = hex ($wc) unless 0x10000 * $M2U{$F} + $M2U{$S} == hex ($wc);
   }
 }}
-if ($CodePage == 20932) {
-for my $F (0xA1..0xFE) {	## three bytes
-for my $S (@{$S_range{$CodePage} || [0x01..0xFF] }) {
-  my $mb = pack 'CCC', 0x8F, $F, $S;
-  my $wc = "\x00" x 10;
-  my $len = $M2W->Call ($CodePage, 0, $mb, length ($mb) => $wc, length ($wc));
-  $wc = substr ($wc, 0, $len * 2);
-  if (length ($wc) > 2) {
-    $wc =~ s/(.)(.)/$2$1/gs;
-    $wc =~ s/(.)/sprintf '%02X', ord $1/ges;
-    $M2U{ 0x100 * $F + $S } = hex $wc;
-  }
-}}
-}
 $M2U{0x00} = 0x0000;
 
 print STDERR "WideChar -> MultiByte...\n";
@@ -137,6 +123,19 @@ for my $C (0x00..0xFF) {
   }
 }}
 $U2M{0x0000} = 0x00;
+
+for my $R1 (0xD8..0xDB) { for my $C1 (0x00..0xFF) {
+for my $R2 (0xDC..0xDF) { for my $C2 (0x00..0xFF) {
+  my $wc = pack 'CC', $C1, $R1, $C2, $R2;	## UTF-16LE
+  my $mb = "\x00" x 10;
+  $W2M->Call ($CodePage, 0, $wc, length ($wc) / 2 => $mb, length ($mb), "\x00", 0);
+  $mb =~ s/\x00.*$//;
+  if (length $mb) {
+    $mb =~ s/(.)/sprintf '%02X', ord $1/ges;
+    $U2M{ 0x10000 + (0x100 * $R1 + $C1 - 0xD800) * 0x400
+                  + (0x100 * $R2 + $C2 - 0xDC00) } = hex ($mb);
+  }
+}}}}
 
 print STDERR "Creating table...\n";
 
@@ -193,4 +192,4 @@ Public Domain.
 
 =cut
 
-# $Date: 2002/12/12 07:45:49 $
+# $Date: 2002/12/12 07:47:19 $

@@ -1,3 +1,7 @@
+2002-12-12  Wakaba  <w@suika.fam.cx>
+
+	* winapi2tbl.pl: Bug fix (to enable to run on Windows XP).
+
 2002-10-30  Nanashi-san  <nanashi@nanashi.invalid>
 
 	* winapi2tbl.pl: New script.
