@@ -1,0 +1,12 @@
+## name	MacJapanese (GL encoding)
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-name="jisx0208_1990"
+#?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
+0x2140	U+FF3C		# FULLWIDTH REVERSE SOLIDUS
+0x2131	U+FFE3		# FULLWIDTH MARCON (overline)
+0x216F	U+FFE5		# FULLWIDTH YEN SIGN
+#; Additional characters
+#?import src="gl-macjapanese-add.tbr" mode="symbol,vertical84"
+#; $Date: 2002/10/05 00:26:26 $
+## license	Public Domain

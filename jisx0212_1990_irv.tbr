@@ -1,0 +1,5 @@
+#?PETBL/1.0 SOURCE
+## name	JIS X 0212-1990 (used with ISO/IEC 646 IRV) (GL encoding)
+#?import src="gl-jisx0212-common.tbr" mode="isoiec646irv,BROKEN-BAR,han"
+#; $Date: 2002/10/05 00:26:26 $
+## license	Public Domain

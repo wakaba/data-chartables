@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+## name	JIS X 0208-1978 (GL encoding)
+#?o table-name="jisx0208_1978"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="@"
+#?import src="gl-jisx0208-common.tbr" mode="standard,halfwidth,han-1978-revised,han-1983-revised-1978,han-1983-swapped-1978"
+#; $Date: 2002/10/05 00:26:26 $
+## license	Public Domain

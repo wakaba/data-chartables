@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+## name	JIS X 0208:1997 fullwidth-IRV (GL encoding)
+#?o table-name="jisx0208_1997"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-name="jisx0208_1990"
+#?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
+#; $Date: 2002/10/05 00:26:26 $
+## license	Public Domain

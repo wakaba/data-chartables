@@ -1,0 +1,9 @@
+2002-10-05  Nanashi-san
+
+	* *.tbr, Makefile: New files.
+	* tool/: New directory.
+	(Commited by Wakaba <w@suika.fam.cx>.)
+
+2002-10-05  Wakaba <w@suika.fam.cx>
+
+	* ChangeLog: New file.
