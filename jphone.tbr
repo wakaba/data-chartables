@@ -1,0 +1,28 @@
+#?PETBL/1.0 SOURCE
+#?o name="JPHONE pictographs"
+#?o table-name="jphone"
+#?o license="Public Domain"
+#?o map-internal="my ($c,$t) = (shift); ($t,$c) = ($1,hex $2) if $c =~ /(.)-(..)/; (0x70400000 + 94*(100+$t) + $c-0x21)"
+1-29	U+260E
+
+1-2F	U+261D
+
+1-40	U+003F
+1-41	U+0021
+1-42	U+2665
+
+1-68	U+2603
+1-69	U+2601
+1-6A	U+2600
+1-6B	U+2602
+
+2-43	U+2668		# HOT SPRINGS
+
+3-6E	U+00A9		# COPYRIGHT SIGN
+3-6F	U+00AE		# REGISTERED SIGN
+
+4-52	U+25CD
+4-53	U+00D7
+
+6-57	U+2122
+#; $Date: 2002/12/18 10:21:09 $

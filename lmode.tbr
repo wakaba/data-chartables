@@ -1,0 +1,13 @@
+#?PETBL/1.0 SOURCE
+#?o name="L-mode pictographs"
+#?o table-name="lmode"
+#?o charset-chars="256"
+#?o charset-dimension="2"
+#?o charset-name="sjis_lmode_g3"
+#?o license="Public Domain"
+#?o map-internal="my ($c,$d,$t) = (shift); ($t,$c,$d) = ($1,hex $2,hex $3) if $c =~ /([IL])-(..)(..)/; (0x7100E524 + ($c-0xF7)*188 + $d-0x40-($d>0x7F) + ($t eq 'L' && $c==0xF7?188*3:0))"
+#?import src="imode.tbr" except="F7..|F97[5689]|F986|F9B[12]"
+L-F7C7	U+266C		# BEAMED SIXTEENTH NOTES
+
+L-F7D8	U+2740
+#; $Date: 2002/12/18 10:21:09 $

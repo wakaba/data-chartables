@@ -1,3 +1,14 @@
+2002-12-18  Wakaba  <w@suika.fam.cx>
+
+	* esr2pm.pl:  New command '!&' is supported.
+	
+	* tbl2pm.pl: Custom code->internal-code mapper is supported.
+	* tbr2tbl.pl: Likewise.
+
+2002-12-16  Wakaba  <w@suika.fam.cx>
+
+	* esr2pm.pl:  New command 'use:charset:' is supported.
+
 2002-12-16  Nanashi-san  <nanashi-san@nanashi.invalid>
 
 	* esr2pm.pl:  Alias is supported.

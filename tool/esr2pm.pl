@@ -85,13 +85,17 @@ while (<>) {
         } elsif ($l =~ /^C:bit=([78])(\t\s*\#\#.+)?$/) {
           $l = qq(\$C->{bit} = $1;$2);
         } elsif ($l =~ /^use:table:(.+)$/) {
-          $l = qq(eval q(use Encode::Table::$1) unless \$Encode::Table::$1::VERSION;);
+          $l = qq(eval q(use Encode::Table::$1) unless \$Encode::Table::${1}::VERSION;);
         } elsif ($l =~ /^require:private:(.+)$/) {
           $l = qq(eval q(use Encode::Charset::Private q(:$1)) or die \$\@;);
         } elsif ($l =~ /^use:private:(.+)$/) {
           $l = qq(eval q(use Encode::Charset::Private q(:$1)) or die \$\@;\neval q(Encode::Charset::Private::designate_$1 (\$C)););
+        } elsif ($l =~ /^use:charset:(\S+)(?:\s+(.+))?$/) {
+          $l = qq(eval q(require Encode::Charset::$1;\neval q(Encode::Charset::$1->import (qw(@{[$2?$2:':all']})));\nEncode::Charset::${1}::designate (\$C)););
         } elsif ($l =~ /^use:(.+)$/) {
-          $l = qq(eval q(use $1) unless \$$1::VERSION;);
+          $l = qq(eval q(use $1) unless \$${1}::VERSION;);
+        } elsif ($l =~ /^!\&\s+(\S+)/) {
+          $l = qq(\$s = $1 (\$C, \$s););
         } elsif ($l =~ /^\#;/) {
           $l = undef;
         }
@@ -155,6 +159,10 @@ for my $encode (@{ $Info{encoding} }) {
   $encode->{DecodeFull} = $encode->{'Decode:Prepare'}."\n".$encode->{Decode};
   for my $ED (qw/Encode Decode EncodeFull DecodeFull Cversion/) {
     my $ed = $ED =~ /Encode/ ? 'encode' : 'decode';
+    if ($encode->{$ED} =~ /\$C->{option}->{fallback_from_ucs} = /) {
+      $encode->{$ED} =~ s((?=\$C->{option}->{fallback_from_ucs} = ))
+                         (\$C->{option}->{fallback_from_ucs_2} = \$C->{option}->{fallback_from_ucs};\n);
+    }
     if ($encode->{$ED} =~ /Encode::Table/) {
       $encode->{$ED} = q/require Encode::Table;
 my $tbl = defined $obj->{_/.$ed.q/_mapping} ? $obj->{_/.$ed.q/_mapping} : 1;
@@ -375,4 +383,4 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/12/16 10:25:01 $
+# $Date: 2002/12/18 10:21:09 $

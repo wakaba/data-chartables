@@ -137,14 +137,14 @@ sub array_to_table (@%) {
     } elsif (/^#;/) {	## Comment
     } elsif (/^#/) {	## Comment or unsupported function
       push @r, $_;
-    } elsif (/^0x($o->{except} [0-9A-Fa-f]+)(?:\t([^\t]*)(?:\t([^\t]*)(?:\t(.*))?)?)?/x) {
-      my ($u, $l, $f, $m) = (hex $1, $2, $3, $4);
+    } elsif (/^(0x|[0-9A-Za-z]+[+-])($o->{except} [0-9A-Fa-f]+)(?:\t([^\t]*)(?:\t([^\t]*)(?:\t(.*))?)?)?/x) {
+      my ($p, $u, $l, $f, $m) = ($1, hex $2, $3, $4, $5);
       $f = $o->{fallback} if $o->{fallback};
       my $offset = $o->{offset};
       $offset += $u + $offset > 0xFF ? 0x8080 : 0x80 if $o->{right};
       $m =~ s/^#\s*//;
-      push @r, sprintf qq{0x%02X\t%s\t%s\t# %s},
-        $u+$offset, $l, $f, $m || charname ($l);
+      push @r, sprintf qq{%s%02X\t%s\t%s\t# %s},
+        $p, $u+$offset, $l, $f, $m || charname ($l);
     } elsif (/^$/) {
     } else {
       #push @r, $_;
@@ -211,5 +211,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/14 06:56:53 $
+1; ## $Date: 2002/12/18 10:21:09 $
 ### tbr2tbl.pl ends here

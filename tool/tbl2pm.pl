@@ -22,25 +22,30 @@ require Encode;
 my %T;
 my %option;
 while (<>) {
-if (/^0x([0-9A-F]+)\tU\+([0-9A-F]+)\t/) {
-  $T{ hex $1 } = hex $2;
-} elsif (/^#\?o ([A-Za-z0-9-]+)="([^"]+)"/) {
-  my $n = $1; $n =~ tr/-/_/; $option{$n} = $2;
+if (/^((?:0x|[0-9A-Za-z]+[+-])[0-9A-F]+)\tU\+([0-9A-F]+)\t/) {
+  $T{ $1 } = hex $2;
+} elsif (/^#\?o ([A-Za-z0-9-]+)="((?:[^"\\]|\\.)+)"/) {
+  my ($n,$v) = ($1,$2); $n =~ tr/-/_/; $v =~ s/\\(.)/$1/g; $option{$n} = $v;
 }
 }
 
 require 'internal.pl';
 $option{offset} ||= &internal::cp_start (%option) || $internal::cp_start{ $option{charset_name} || $option{table_name} };
+if ($option{map_internal}) {
+  eval qq{\$option{map_internal} = sub { $option{map_internal} }} or die $@;
+} else {
+  $option{map_internal} = sub {
+    my $c = shift;  $c =~ s/0x//;  $c = hex $c;
+    ($option{charset_dimension} > 1 ?
+        (int ($c / 0x100) - $option{_start}) * $option{charset_chars} : 0)
+      + (($c % 0x100) - $option{_start}) + $option{offset};
+  };
+}
 
 my (@T, @U);
 $option{_start} = $option{charset_chars} == 94 ? 0x21 : 0x20;
 @U = sort { $a->[0] <=> $b->[0] }
-     map { 
-       [ ($option{charset_dimension} > 1 ?
-          (int ($_ / 0x100) - $option{_start}) * $option{charset_chars} : 0)
-         + (($_ % 0x100) - $option{_start}) + $option{offset},
-         $T{ $_ } ]
-     } keys %T;
+     map { [ &{$option{map_internal}} ($_), $T{ $_ } ] } keys %T;
 
 my $tbl = '';
 my $pack = '';
@@ -143,5 +148,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/12/12 07:45:17 $
+1; ## $Date: 2002/12/18 10:21:09 $
 ### tbl2pm.pl ends here
