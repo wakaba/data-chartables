@@ -1,3 +1,9 @@
+2002-12-19  Wakaba  <w@suika.fam.cx>
+
+	* gl-jisx0208-to-katakana.tbr, gl-cjk-katakana-hw.tbr,
+	jisx0208_to_katakana.tbr: New tables.
+	* Makefile: Updated.
+
 2002-12-18  Wakaba  <w@suika.fam.cx>
 
 	* imode.tbr, lmode.tbr, jphone.tbr, doti.tbr: New tables.

@@ -1,0 +1,10 @@
+#?PETBL/1.0 SOURCE
+#?o name="Some JIS X 0208 characters vs HALFWIDTH characters"
+#?o table-name="jisx0208_to_katakana_hw"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-name="jisx0208_1990"
+#?o license="Public Domain"
+#?import src="gl-jisx0208-to-halfwidth.tbr"
+#?import src="gl-cjk-katakana-hw.tbr" offset="2500"
+#; $Date: 2002/12/19 01:27:01 $

@@ -14,7 +14,8 @@ PM_jis = jisx0208_1978.pm jisx0208_1978_irv.pm \
   jisx0212_1990_open_0201.pm jisx0212_1990_open_ascii.pm \
   jisx0212_1990_open_ms.pm \
   jisx0213_2000_1.pm jisx0213_2000_1_esc_24_42.pm jisx0213_2000_2.pm \
-  jisx0201_latin.pm jisx0201_katakana.pm ascii_yen.pm
+  jisx0201_latin.pm jisx0201_katakana.pm ascii_yen.pm \
+  jisx0208_to_katakana.pm
 PM_gb = gb2312_1980.pm gb12345_1990.pm iso_ir_165.pm
 PM_ks = ksx1001_1992.pm
 PM_kps = kps9566_1997.pm
@@ -52,6 +53,7 @@ misc-tbl:  $(PM_misc:.pm=.tbl)
 
 %.pm: %.tbl $(TBL2PM) $(PLDIR)internal.pl
 	$(PERLI) $(TBL2PM) $< > $@
+	$(PERLI) -c $@
 
 clean:
 	rm -rfv *.BAK .*.BAK *~ .*~
