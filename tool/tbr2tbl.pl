@@ -129,8 +129,10 @@ sub array_to_table (@%) {
       push @r, &{ $CMD{ $opt{cmd} } } (\%opt) if ref $CMD{ $opt{cmd} };
     } elsif (/^##/) {	## Comment
       push @r, $_;
+    } elsif (/^#;/) {	## Comment
     } elsif (/^#/) {	## Comment or unsupported function
-    } elsif (/^0x($o->{except} [0-9A-Fa-f]+)\t([^\t]*)\t([^\t]*)\t(.*)/x) {
+      push @r, $_;
+    } elsif (/^0x($o->{except}  (?!3021)[0-9A-Fa-f]+)\t([^\t]*)\t([^\t]*)\t(.*)/x) {
       my ($u, $l, $f, $m) = (hex $1, $2, $3, $4);
       $f = $o->{fallback} if $o->{fallback};
       my $offset = $o->{offset};
@@ -140,7 +142,7 @@ sub array_to_table (@%) {
         $u+$offset, $l, $f, $m || charname ($l);
     } elsif (/^$/) {
     } else {
-      push @r, $_;
+      #push @r, $_;
     }
     
     }	# / mode is enabled
@@ -156,6 +158,7 @@ $CMD{import} = sub {
     my @tbl = <TBL>;  close TBL;  map {s/[\x0D\x0A]+$//} @tbl;
     my $m = {}; for (split /,/, $opt->{mode}) { $m->{$_} = 1 }
     shift (@tbl) if $tbl[0] =~ m!^#\?PETBL/1.0 SOURCE!;
+    $opt->{except} = $opt->{except} ? qq((?!(?i)$opt->{except})) : '';
     array_to_table (\@tbl, {offset => hex $opt->{offset},
       fallback => $opt->{fallback}, mode => $m,
       except => $opt->{except}, right => $opt->{right}});
@@ -201,5 +204,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/05 01:34:55 $
+1; ## $Date: 2002/10/05 05:01:24 $
 ### tbr2tbl.pl ends here

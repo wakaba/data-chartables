@@ -1,10 +1,11 @@
 #?PETBL/1.0 SOURCE
 ## name	JIS X 0212-1990 + JIS X 0213:2000 plane 2 (GL encoding)
-#?o table-name="jisx0212_1990_jisx0213_2000_2"
+#?o table-name="jisx0212_0213"
+##?o table-name="jisx0212_1990_jisx0213_2000_2"
 #?o charset-chars="94"
 #?o charset-dimension="2"
 #?o charset-final-byte="P"
 #?import src="gl-jisx0212-common.tbr" mode="halfwidth,BROKEN-BAR,han"
 #?import src="jisx0213_2000_2.tbr"
-#; $Date: 2002/10/05 00:26:26 $
+#; $Date: 2002/10/05 05:01:24 $
 ## license	Public Domain

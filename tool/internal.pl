@@ -28,6 +28,9 @@ sub cp_start (%) {
   if ($o{charset_chars} == 94 && $o{charset_dimension} == 2
     && length $o{charset_final_byte}) {
     0xE9F6C0 + 94*94*(ord ($o{charset_final_byte})-0x30)
+  } elsif ($o{charset_chars} == 94 && $o{charset_dimension} == 1
+    && length $o{charset_final_byte}) {
+    0xE90940 + 94*(ord ($o{charset_final_byte})-0x30)
   }
 }
 
@@ -48,5 +51,5 @@ and/or modify it under the same terms as Perl itself.
 
 =cut
 
-1; ## $Date: 2002/10/05 01:34:55 $
+1; ## $Date: 2002/10/05 05:01:24 $
 ### internal.pl ends here

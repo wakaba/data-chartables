@@ -22,7 +22,7 @@ require Encode;
 my %T;
 my %option;
 while (<>) {
-if (/^0x([0-9A-F][0-9A-F][0-9A-F][0-9A-F])\tU\+([0-9A-F]+)\t/) {
+if (/^0x([0-9A-F]+)\tU\+([0-9A-F]+)\t/) {
   $T{ hex $1 } = hex $2;
 } elsif (/^#\?o ([A-Za-z0-9-]+)="([^"]+)"/) {
   my $n = $1; $n =~ tr/-/_/; $option{$n} = $2;
@@ -36,7 +36,8 @@ my (@T, @U);
 $option{_start} = $option{charset_chars} == 94 ? 0x21 : 0x20;
 @U = sort { $a->[0] <=> $b->[0] }
      map { 
-       [ (int ($_ / 0x100) - $option{_start}) * $option{charset_chars}
+       [ ($option{charset_dimension} > 1 ?
+          (int ($_ / 0x100) - $option{_start}) * $option{charset_chars} : 0)
          + (($_ % 0x100) - $option{_start}) + $option{offset},
          $T{ $_ } ]
      } keys %T;
@@ -105,7 +106,7 @@ use vars qw/%L2U %U2L \$VERSION/;
 
 #
 
-%L2U = map {Encode::_utf8_on (\$_); \$_} unpack
+%L2U = map {Encode::_utf8_on (\$_) if length \$_ > 1; \$_} unpack
 (q{$pack}, <<'END');
 EOH
 
@@ -143,5 +144,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/05 01:34:55 $
+1; ## $Date: 2002/10/05 05:01:24 $
 ### tbl2pm.pl ends here
