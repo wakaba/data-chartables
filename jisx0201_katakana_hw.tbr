@@ -1,5 +1,5 @@
 ## name	JIS X 0201 Katakana Graphic Characer Set (Map to HALFWIDTH variant)
-#?o table-name="jisx0201_katakana"
+#?o table-name="jisx0201_katakana_hw"
 #?o charset-chars="94"
 #?o charset-dimension="1"
 #?o charset-final-byte="I"
@@ -97,5 +97,5 @@
 0x7C			# <reserved>
 0x7D			# <reserved>
 0x7E			# <reserved>
-#; $Date: 2002/10/05 23:36:10 $
+#; $Date: 2002/10/12 07:27:01 $
 ## license	Public Domain

@@ -46,7 +46,7 @@ my $tbl = '';
 my $pack = '';
 for (@U) {
   for ($_->[0], $_->[1]) {
-    $_ = chr $_; $_ = $_ eq "\\" ? "\\\\" : $_ eq q(') ? q(\') : $_;
+    $_ = chr $_;
     Encode::_utf8_off ($_);
     $tbl .= $_;
     $pack .= 'a' . length ($_);
@@ -144,5 +144,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/05 05:01:24 $
+1; ## $Date: 2002/10/12 07:27:01 $
 ### tbl2pm.pl ends here
