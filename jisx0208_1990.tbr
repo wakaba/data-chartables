@@ -5,5 +5,6 @@
 #?o charset-dimension="2"
 #?o charset-name="jisx0208_1990"
 #?import src="gl-jisx0208-common.tbr" mode="standard,halfwidth,NOT-SIGN,COMBINING-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
-#; $Date: 2002/10/05 00:26:26 $
+#?import src="gl-open-cs1-private.tbr"
+#; $Date: 2002/12/12 07:48:00 $
 ## license	Public Domain
