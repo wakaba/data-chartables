@@ -1,3 +1,18 @@
+=head1 NAME
+
+internal.pl --- Utilities to get information of internal code
+(to generate dumped script).
+
+=head1 DESCRIPTION
+
+This library collects functions and constants of internal
+coding system properties.  Internal code allocation is
+temporary so that (pre-dumped) source script should not
+be embeded internal code related information (such as
+code point of a character from ISO-IR) as far as possible.
+
+=cut
+
 package internal;
 use strict;
 use 5.7.3;
@@ -16,5 +31,22 @@ sub cp_start (%) {
   }
 }
 
-1; ## $Date: 2002/10/05 00:25:14 $
+=head1 SEE ALSO
+
+Encode::Table, Encode::ISO2022, tbl2pm.pl
+
+=head1 AUTHOR
+
+Nanashi-san
+
+=head1 LICENSE
+
+Copyright 2002 AUTHOR
+
+This library is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
+=cut
+
+1; ## $Date: 2002/10/05 01:34:55 $
 ### internal.pl ends here

@@ -1,10 +1,17 @@
 
 PLDIR = tool/
 PERL = perl
-PERLI = $(PRRL) -I$(PLDIR)
+PERLI = $(PERL) -I$(PLDIR)
 TBR2TBL = $(PLDIR)tbr2tbl.pl
 TBL2UCM = $(PLDIR)tbl2ucm.pl
 TBL2PM = $(PLDIR)tbl2pm.pl
+
+PM_jis = jisx0208_1978.pm jisx0208_1983.pm jisx0208_1990.pm \
+  jisx0208_1997.pm jisx0208_1997_irv.pm jisx0208_1997_latin.pm \
+  jisx0212_1990.pm jisx0212_1990_irv.pm jisx0212_0213.pm \
+  jisx0213_2000_1.pm jisx0213_2000_2.pm
+
+jis:  $(PM_jis)
 
 %.tbl: %.tbr $(TBR2TBL)
 	$(PERLI) $(TBR2TBL) $< > $@
@@ -17,3 +24,4 @@ TBL2PM = $(PLDIR)tbl2pm.pl
 
 clean:
 	rm -rfv *.BAK .*.BAK *~ .*~
+	rm -ffv $(PM_jis) $(PM_jis:.pm=.tbl)

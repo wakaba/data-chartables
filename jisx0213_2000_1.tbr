@@ -4,6 +4,6 @@
 #?o charset-dimension="2"
 #?o charset-final-byte="O"
 #?import src="gl-jisx0208-common.tbr" mode="standard,halfwidth,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
-#?import left="gl-jisx0213-add.tbr" mode="halfwidth"
-#; $Date: 2002/10/05 00:26:26 $
+#?import src="gl-jisx0213-add.tbr" mode="halfwidth"
+#; $Date: 2002/10/05 01:34:55 $
 ## license	Public Domain

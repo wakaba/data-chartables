@@ -4,6 +4,6 @@
 #?o charset-name="jisx0208_1990"
 #?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,jisx0201latin,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
 ## Common free area (private use area)
-#?import left="gl-open-cs1-private.tbr"
-#; $Date: 2002/10/05 00:26:26 $
+#?import src="gl-open-cs1-private.tbr"
+#; $Date: 2002/10/05 01:34:55 $
 ## license	Public Domain

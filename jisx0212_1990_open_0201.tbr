@@ -2,7 +2,7 @@
 ## name	JIS X 0212-1990 of eucJP-0201 (used with JIS X 0201) (GL encoding)
 #?import src="gl-jisx0212-common.tbr" mode="jisx0201latin,BROKEN-BAR,han"
 #; Common free area of eucJP-open
-#?import left="gl-open-cs3-ibm.tbr"
-#?import left="gl-open-cs3-private.tbr"
-#; $Date: 2002/10/05 00:26:26 $
+#?import src="gl-open-cs3-ibm.tbr"
+#?import src="gl-open-cs3-private.tbr"
+#; $Date: 2002/10/05 01:34:55 $
 ## license	Public Domain
