@@ -1,3 +1,10 @@
+2002-10-13  Nanashi-san
+
+	* isoiec8859_*.tbr, iso_ir_204.tbr,
+	iso_ir_205.tbr, iso_ir_206.tbr: New tables.
+	* Makefile: Updated.
+	(Committed by Wakaba <w@suika.fam.cx>.)
+
 2002-10-06  Nanashi-san
 
 	* *gb*.tbr, iso_ir_*.tbr, kps9566_1997.tbr,

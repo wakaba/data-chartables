@@ -1,0 +1,15 @@
+#?PETBL/1.0 SOURCE
+#?o full-name="ISO/IEC 8859-9 right half (GL encoding)"
+#?o table-name="isoiec8859_9"
+#?o charset-chars="96"
+#?o charset-dimension="1"
+#?o charset-final-byte="M"
+#?import src="isoiec8859_1.tbr" except="5[0DE]|7[0DE]"
+0x50	U+011E		# LATIN CAPITAL LETTER G WITH BREVE
+0x5D	U+0130		# LATIN CAPITAL LETTER I WITH DOT ABOVE
+0x5E	U+015E		# LATIN CAPITAL LETTER S WITH CEDILLA
+0x70	U+011F		# LATIN SMALL LETTER G WITH BREVE
+0x7D	U+0131		# LATIN SMALL LETTER DOTLESS I
+0x7E	U+015F		# LATIN SMALL LETTER S WITH CEDILLA
+#; $Date: 2002/10/13 08:34:56 $
+#?o table-license="Public Domain."

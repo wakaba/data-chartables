@@ -122,7 +122,7 @@ sub array_to_table (@%) {
     } elsif ($o->{mode}->{$mode}) {	## mode is enabled
     
     if (/^#\?o/) {	## table option
-      push @r, $_;
+      push @r, $_ unless $o->{_imported_file};
     } elsif (s/^#\?([A-Za-z0-9-]+)//) {
       my %opt = (cmd => $1);
       s{ ([A-Za-z0-9-]+)=(?:"((?:[^"\\]|\\.)*)"|([A-Za-z0-9-]+)) 
@@ -131,7 +131,7 @@ sub array_to_table (@%) {
         $V =~ s/\\(.)/$1/g;
         $opt{ $N || $n } = $n ? 1 : ($V || $v);
       }gex;
-      push @r, &{ $CMD{ $opt{cmd} } } (\%opt) if ref $CMD{ $opt{cmd} };
+      push @r, &{ $CMD{ $opt{cmd} } } ($o, \%opt) if ref $CMD{ $opt{cmd} };
     } elsif (/^##/) {	## Comment
       push @r, $_;
     } elsif (/^#;/) {	## Comment
@@ -156,7 +156,7 @@ sub array_to_table (@%) {
 }
 
 $CMD{import} = sub {
-  my ($opt) = @_;
+  my ($opt0, $opt) = @_;
   if ($opt->{src}) {
     ## BUG: resolve of relative path
     open TBL, $opt->{src} or die "$0: $opt->{src}: Imported table not found";
@@ -164,9 +164,11 @@ $CMD{import} = sub {
     my $m = {}; for (split /,/, $opt->{mode}) { $m->{$_} = 1 }
     shift (@tbl) if $tbl[0] =~ m!^#\?PETBL/1.0 SOURCE!;
     $opt->{except} = $opt->{except} ? qq((?!(?i)$opt->{except})) : '';
+    $opt->{except} .= $opt0->{except};
     array_to_table (\@tbl, {offset => hex $opt->{offset},
       fallback => $opt->{fallback}, mode => $m,
-      except => $opt->{except}, right => $opt->{right}});
+      except => $opt->{except}, right => $opt->{right},
+      _imported_file => 1});
   } elsif ($opt->{'std-cl'}) { @{ $C{tbl_std_cl} };
   } elsif ($opt->{'std-cr'}) { @{ $C{tbl_std_cr} };
   } elsif ($opt->{'std-0x20'} || $opt->{'std-sp'}) { $C{tbl_std_20};
@@ -209,5 +211,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/06 06:00:16 $
+1; ## $Date: 2002/10/13 08:34:56 $
 ### tbr2tbl.pl ends here

@@ -1,0 +1,11 @@
+#?PETBL/1.0 SOURCE
+#?o full-name="ISO/IEC 8859-8:1999 right half (GL encoding)"
+#?o table-name="isoiec8859_8_1999"
+#?o charset-chars="96"
+#?o charset-dimension="1"
+#?o charset-final-byte="]"
+#?import src="isoiec8859_8.tbr"
+0x7D	U+200E		# LEFT-TO-RIGHT MARK
+0x7E	U+200F		# RIGHT-TO-LEFT MARK
+#; $Date: 2002/10/13 08:34:56 $
+#?o table-license="Public Domain."

@@ -1,0 +1,10 @@
+#?PETBL/1.0 SOURCE
+#?o full-name="Latin-4 with EURO SIGN (GL encoding)"
+#?o table-name="iso_ir_205"
+#?o charset-chars="96"
+#?o charset-dimension="1"
+#?o charset-final-byte="d"
+#?import src="isoiec8859_4.tbr" except="24"
+0x24	U+20AC		# EURO SIGN
+#; $Date: 2002/10/13 08:34:56 $
+#?o table-license="Public Domain."

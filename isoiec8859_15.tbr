@@ -1,0 +1,17 @@
+#?PETBL/1.0 SOURCE
+#?o full-name="ISO/IEC 8859-15 right half (GL encoding)"
+#?o table-name="isoiec8859_15"
+#?o charset-chars="96"
+#?o charset-dimension="1"
+#?o charset-final-byte="b"
+#?import src="isoiec8859_1.tbr" except="2[468]|3[48CDE]"
+0x24	U+20AC		# EURO SIGN
+0x26	U+0160		# LATIN CAPITAL LETTER S WITH CARON
+0x28	U+0161		# LATIN SMALL LETTER S WITH CARON
+0x34	U+017D		# LATIN CAPITAL LETTER Z WITH CARON
+0x38	U+017E		# LATIN SMALL LETTER Z WITH CARON
+0x3C	U+0152		# LATIN CAPITAL LIGATURE OE
+0x3D	U+0153		# LATIN SMALL LIGATURE OE
+0x3E	U+0178		# LATIN CAPITAL LETTER Y WITH DIAERESIS
+#; $Date: 2002/10/13 08:34:56 $
+#?o table-license="Public Domain."
