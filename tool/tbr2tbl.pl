@@ -132,7 +132,7 @@ sub array_to_table (@%) {
     } elsif (/^#;/) {	## Comment
     } elsif (/^#/) {	## Comment or unsupported function
       push @r, $_;
-    } elsif (/^0x($o->{except}  (?!3021)[0-9A-Fa-f]+)\t([^\t]*)\t([^\t]*)\t(.*)/x) {
+    } elsif (/^0x($o->{except} [0-9A-Fa-f]+)\t([^\t]*)\t([^\t]*)\t(.*)/x) {
       my ($u, $l, $f, $m) = (hex $1, $2, $3, $4);
       $f = $o->{fallback} if $o->{fallback};
       my $offset = $o->{offset};
@@ -204,5 +204,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/05 05:01:24 $
+1; ## $Date: 2002/10/06 03:32:30 $
 ### tbr2tbl.pl ends here

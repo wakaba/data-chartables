@@ -277,7 +277,7 @@
 0x2F7B	U+7CA6		# <cjk>
 0x2F7C	U+4E85		# <cjk>
 0x2F7D	U+5570		# <cjk>
-#; GB 8865.2-88: 90-94 Han from GB 7589-87
+#; GB 8865.2-88: 0x7A21(90-01)-0x7E7E(94-94) Han from GB 7589-87
 0x7A21	U+4E0F		# <cjk>
 0x7A22	U+673F		# <cjk>
 0x7A23	U+4E42		# <cjk>
@@ -523,7 +523,7 @@
 0x7C57	U+98CF		# <cjk>
 0x7C58	U+98D4		# <cjk>
 0x7C59	U+98D7		# <cjk>
-#0x7C5A	U+6996		# <cjk>
+#;0x7C5A	U+6996		# <cjk>
 0x7C5A	U+7A40		# <cjk>
 0x7C5B	U+7098		# <cjk>
 0x7C5C	U+70DC		# <cjk>
@@ -898,7 +898,7 @@
 
 #?if-mode han-added-1992
 #; ISO-IR 165 (1992) and GB 8865-89 (G8):
-#?   12-01 - 12-94, 13-51 - 13-94, 15-94 Han
+#;   12-01 - 12-94, 13-51 - 13-94, 15-94 Han
 0x2C21	U+53BE		# <cjk>
 0x2C22	U+4EB8		# <cjk>
 0x2C23	U+4F3E		# <cjk>

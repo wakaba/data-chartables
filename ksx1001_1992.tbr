@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+## name KS X 1001-1992 (GL encoding)
+#?o table-name="ksx1001_1992"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="C"
+#?import src="gl-ksx1001-common.tbr" mode="nonhan-standard,halfwidth,private"
+#; $Date: 2002/10/06 03:32:30 $
+## License: Public Domain.

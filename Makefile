@@ -12,12 +12,15 @@ PM_jis = jisx0208_1978.pm jisx0208_1983.pm jisx0208_1990.pm \
   jisx0213_2000_1.pm jisx0213_2000_1_esc_24_42.pm jisx0213_2000_2.pm \
   jisx0201_latin.pm jisx0201_katakana.pm
 PM_gb = gb2312_1980.pm gb12345_1990.pm iso_ir_165.pm
+PM_ks = ksx1001_1992.pm
 PM_kps = kps9566_1997.pm
 
 jis:  $(PM_jis)
 jis-tbl:  $(PM_jis:.pm=.tbl)
 gb:  $(PM_gb)
 gb-tbl:  $(PM_gb:.pm=.tbl)
+ks:  $(PM_ks)
+ks-tbl:  $(PM_ks:.pm=.tbl)
 kps:  $(PM_kps)
 kps-tbl:  $(PM_kps:.pm=.tbl)
 
@@ -34,4 +37,5 @@ clean:
 	rm -rfv *.BAK .*.BAK *~ .*~
 	rm -ffv $(PM_jis) $(PM_jis:.pm=.tbl) \
 	  $(PM_gb) $(PM_gb:.pm=.tbl) \
+	  $(PM_ks) $(PM_ks:.pm=.tbl) \
 	  $(PM_kps) $(PM_kps:.pm=.tbl)
