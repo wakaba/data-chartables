@@ -164,7 +164,7 @@ $CMD{import} = sub {
     my $m = {}; for (split /,/, $opt->{mode}) { $m->{$_} = 1 }
     shift (@tbl) if $tbl[0] =~ m!^#\?PETBL/1.0 SOURCE!;
     $opt->{except} = $opt->{except} ? qq((?!(?i)$opt->{except})) : '';
-    $opt->{except} .= $opt0->{except};
+    $opt->{except} .= $opt0->{except} if $opt0->{except};
     array_to_table (\@tbl, {offset => hex $opt->{offset},
       fallback => $opt->{fallback}, mode => $m,
       except => $opt->{except}, right => $opt->{right},
@@ -211,5 +211,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/13 08:34:56 $
+1; ## $Date: 2002/10/14 06:56:53 $
 ### tbr2tbl.pl ends here

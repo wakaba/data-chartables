@@ -1,0 +1,18 @@
+## name	JIS X 0208-1983 (used with ISO/IEC 646:1991 IRV) (GL encoding)
+#?o table-name="jisx0208_1983_irv"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="B"
+#?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,NOT-SIGN,COMBINING-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised-1983"
+#; Han characters revised by 1983 edition (Re-revised by 1990 edition)
+0x3139	U+53A9		# <cjk>
+0x3142	U+990C		# <cjk>
+0x3335	U+6982		# <cjk>
+0x4862	U+6249		# <cjk>
+0x4A43	U+853D		# <cjk>
+0x553D	U+5ABE		# <cjk>
+0x626A	U+792A		# <cjk>
+0x7051	U+9760		# <cjk>
+0x7057	U+9771		# <cjk>
+#; $Date: 2002/10/14 06:56:53 $
+## license	Public Domain

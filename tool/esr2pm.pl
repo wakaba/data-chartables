@@ -21,7 +21,7 @@ while (<>) {
       $mode = 0;  %item = ();
     } elsif (/^(.+):$/) {
       $section = $1;
-    } elsif (/^\t(.+)$/) {
+    } elsif (/^\t(.*)$/) {
       my $l = $1;
       if ($section == 'Encode' || $section == 'Decode') {
         if ($l =~ /^->(.+)$/) {
@@ -68,9 +68,11 @@ print <<EOH;
 =head1 NAME
 
 $ReplaceText{MYSELF} --- $Info{ShortDescription}
-@{[ $Info{'POD:DESCRIPTION'} ? qq{=head1 DESCRIPTION
+@{[ $Info{'POD:DESCRIPTION'} ? qq{
+=head1 DESCRIPTION
 
 $Info{'POD:DESCRIPTION'}} : '']}
+
 =cut
 
 package $ReplaceText{MYSELF};
@@ -184,12 +186,19 @@ and/or modify it under the same terms as Perl itself.},
     ReferenceIANAREG => q([IANAREG] "CHARACTER SETS", IANA <http://www.iana.org/>,
 <http://www.iana.org/assignments/character-sets>.
 The charset registry for IETF <http://www.ietf.org/> standards.),
+    ReferenceJISX0212_1995 => q(JIS X 0221-1995, "Universal multi-octet coded character
+set (UCS)", Japan Industrial Standards Committee
+<http://www.jisc.go.jp/>, 1995.  IDT with ISO/IEC 10646-1:1993
+but three additional appendixes.),
     ReferenceJISX0208_1997 => q(JIS X 0208:1997, "7-bit and 8-bit double byte coded Kanji
 set for information interchange", Japan Industrial Standards
 Committee (JISC) <http://www.jisc.go.jp/>, 1997.),
     ReferenceJISX0213_2000 => q(JIS X 0213:2000, "7-bit and 8-bit double byte coded extended Kanji
 sets for information interchange", Japan Industrial Standards
 Committee (JISC) <http://www.jisc.go.jp/>, 2000.),
+    ReferenceRFC1468 => q(RFC 1468, "Japanese Character Encoding for Internet Messages",
+J. Murai, et al, IETF <http://www.ietf.org/>, June 1993.
+<urn:ietf:rfc:1468>.),
     YEAR => (gmtime)[5]+1900,
   );
   %RT;
@@ -212,5 +221,5 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/10/13 02:31:06 $
+# $Date: 2002/10/14 06:56:53 $
 ### esr2pm.pl ends here

@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+## name	JIS X 0208-1978 (used with ISO/IEC 646:1991 IRV) (GL encoding)
+#?o table-name="jisx0208_1978_irv"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="@"
+#?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,han-1978-revised,han-1983-revised-1978,han-1983-swapped-1978"
+#; $Date: 2002/10/14 06:56:53 $
+## license	Public Domain
