@@ -180,7 +180,7 @@ my %tblopt = (-autoload => defined $obj->{_/.$ed.q/_mapping_autoload} ? $obj->{_
   \$chk & Encode::XMLCREF ? 'sgml-hex' : 'replacement';
 ) : '')
                         .$encode->{$ED};
-      } elsif ($encode->{$ED} =~ /SJIS/i || $encode->{Encode} =~ /SJIS/i || $encode->{Decode} =~ /SJIS/i) {
+      } elsif ($encode->{Encode} =~ /internal_to_sjis/i || $encode->{Decode} =~ /sjis_to_internal/i) {
         $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object_sjis;\n).$encode->{$ED};
       } else {
         $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object;\n).$encode->{$ED};
@@ -383,4 +383,4 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/12/18 10:21:09 $
+# $Date: 2002/12/18 12:57:40 $

@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+#?o name="JIS X 0208:1997 fullwidth-YEN (GL encoding)"
+#?o table-name="jisx0208_1997_yen"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-name="jisx0208_1990"
+#?o license="Public Domain"
+#?import src="gl-jisx0208-common.tbr" mode="standard,fullwidth,ascii-yen,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
+#; $Date: 2002/12/18 12:57:40 $

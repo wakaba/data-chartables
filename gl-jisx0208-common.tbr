@@ -151,6 +151,11 @@
 0x2140	U+005C		# REVERSE SOLIDUS
 0x216F	U+FFE5		# FULLWIDTH YEN SIGN
 #?end-if-mode
+#?if-mode ascii-yen
+0x2131	U+203E		# OVERLINE
+0x2140	U+005C		# REVERSE SOLIDUS
+0x216F	U+FFE5		# FULLWIDTH YEN SIGN
+#?end-if-mode
 #; DOLLER SIGN: there is different-glyph version (1978). (JIS X 0208:1997 A7.2.2)
 
 #?if-mode standard

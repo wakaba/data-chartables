@@ -2,6 +2,10 @@
 
 	* imode.tbr, lmode.tbr, jphone.tbr, doti.tbr: New tables.
 	* Makefile: Updated.
+	
+	* ascii_yen.tbr: New table.
+	* jisx0208_1997_yen.tbr: Likewise.
+	* gl-jisx0208-common.tbr (ascii-yen): New mode.
 
 2002-10-14  Nanashi-san
 
