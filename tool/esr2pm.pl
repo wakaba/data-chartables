@@ -29,7 +29,7 @@ while (<>) {
           if ($name eq 'iso2022') {
             $l = q(($s, %s) = Encode::ISO2022::internal_to_iso2022 ($s, $C););
           } elsif ($name eq 'sjis') {
-            $l = q($s = Encode::SJIS::internal_to_sjis ($s, $C););
+            $l = q(($s, %s) = Encode::SJIS::internal_to_sjis ($s, $C););
           }
         } elsif ($l =~ /^->(.+)$/) {
           $l = qq(my \$e = Encode::find_encoding (q($1))->__clone;\n\$e->{_encode_mapping} = 0;\n\$s = \$e->encode (\$s););
@@ -74,7 +74,7 @@ while (<>) {
                qq(    \$C->{option}->{designate_to}->{\$c}->{'\x21'.\$F} = $1;\n).
                qq(    \$C->{option}->{designate_to}->{\$c}->{'\x22'.\$F} = $1;\n).
                qq(    \$C->{option}->{designate_to}->{\$c}->{'\x23'.\$F} = $1;\n).
-               qq(  }\n);
+               qq(  }\n).
                qq(});
         } elsif ($l =~ /^C:designate:([^:=]+):([^=]+)=(-?[0-3]+)(\t\s*\#\#.+)?$/) {
           $l = qq(\$C->{option}->{designate_to}->{$1}->{'$2'} = $3;$4);
@@ -148,6 +148,8 @@ $Info{'POD:ENCODING:PREAMBLE'}
 
 EOH
 
+my @alias_def;
+
 for my $encode (@{ $Info{encoding} }) {
   $encode->{EncodeFull} = $encode->{'Encode:Prepare'}."\n".$encode->{Encode};
   $encode->{DecodeFull} = $encode->{'Decode:Prepare'}."\n".$encode->{Decode};
@@ -165,12 +167,12 @@ my %tblopt = (-autoload => defined $obj->{_/.$ed.q/_mapping_autoload} ? $obj->{_
                         .qq(\$C->{_encoder} = \$obj;\n)
                         .($ED eq 'EncodeFull' ? qq(\$C->{option}->{fallback_from_ucs} = \$obj->{_encode_fallback} ? \$obj->{_encode_fallback} :
   \$chk & Encode::DIE_ON_ERR ? 'croak' :
-  \$chk & Encode::FB_WARN ? 'quiet+warn' : \$chk & Encode::RETURN_ON_ERR ? 'quiet' :
+  \$chk & Encode::RETURN_ON_ERR ? (\$chk & Encode::WARN_ON_ERR ? 'quiet+warn' : 'quiet') :
   \$chk & Encode::PERLQQ ? 'perl' :        \$chk & Encode::HTMLCREF ? 'sgml' :
   \$chk & Encode::XMLCREF ? 'sgml-hex' : 'replacement';
 ) : '')
                         .$encode->{$ED};
-      } elsif ($encode->{$ED} =~ /SJIS/i) {
+      } elsif ($encode->{$ED} =~ /SJIS/i || $encode->{Encode} =~ /SJIS/i || $encode->{Decode} =~ /SJIS/i) {
         $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object_sjis;\n).$encode->{$ED};
       } else {
         $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object;\n).$encode->{$ED};
@@ -183,7 +185,10 @@ my %tblopt = (-autoload => defined $obj->{_/.$ed.q/_mapping_autoload} ? $obj->{_
     }
     $encode->{$ED} =~ s/\n/\n  /g;
   }
-  print <<EOH;
+  
+  ## Define a new encoding
+  if ($encode->{Name}) {
+    print <<EOH;
 
 package Encode::$Info{Name}::$encode->{ModuleName};
 our \$VERSION = \$Encode::$Info{Name}::VERSION;
@@ -239,8 +244,32 @@ sub __code_version (\$) {
   \$C;
 }):'']}
 EOH
+    ## Define a set of aliases
+    } elsif ($encode->{AliasOf}) {
+      my @alias = split /\s+/, $encode->{Alias};
+      my $alias1 = shift @alias;
+      print <<EOH;
+
+=item $alias1
+
+$encode->{Description}@{[ @alias ? '
+(Alias: ' . join (', ', @alias) . ')' : '' ]}
+
+This name is an alias of $encode->{AliasOf}.
+
+=cut
+
+EOH
+      ## Encode::Alias is already 'use'ed by Encode, so we don't have to 'require' it.
+      for ($alias1, @alias) {
+        ## Aliases is not defined here, because 'parent' of aliases can be defined
+        ## in later part of THIS module.
+        push @alias_def, "Encode::Alias::define_alias ('$_' => '$encode->{AliasOf}');\n";
+      }
+    }
 }
 
+print @alias_def;
 print <<EOH;
 
 =back
@@ -346,4 +375,4 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/12/14 11:02:25 $
+# $Date: 2002/12/16 10:25:01 $
