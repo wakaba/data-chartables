@@ -1,6 +1,6 @@
 2002-10-06  Nanashi-san
 
-	* *gb*.tbr, iso_ir_165.tbr, kps9566_1997.tbr,
+	* *gb*.tbr, iso_ir_*.tbr, kps9566_1997.tbr,
 	macchinesesimp.tbr, *ks*.tbr: New tables.
 	* Makefile: Updated.
 	(Committed by Wakaba <w@suika.fam.cx>.)

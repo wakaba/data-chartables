@@ -1,0 +1,137 @@
+#?PETBL/1.0 SOURCE
+## name	ISO-IR 231 (GL encoding)
+#?o table-name="iso_ir_231"
+#?o charset-chars="94"
+#?o charset-dimension="1"
+#?o charset-final-byte="!E"
+## ANSI/NISO Z39.47 <http://www.niso.org/standards/resources/Z39-47.pdf> GR set
+## This table is extracted from that of <http://lcweb.loc.gov/marc/specifications/speccharlatin.html>.
+0x21	U+0141		# UPPERCASE POLISH L / LATIN CAPITAL LETTER L WITH STROKE
+0x22	U+00D8		# UPPERCASE SCANDINAVIAN O / LATIN CAPITAL LETTER O WITH STROKE
+0x23	U+0110		# UPPERCASE D WITH CROSSBAR / LATIN CAPITAL LETTER D WITH STROKE
+0x24	U+00DE		# UPPERCASE ICELANDIC THORN / LATIN CAPITAL LETTER THORN (Icelandic)
+0x25	U+00C6		# UPPERCASE DIGRAPH AE / LATIN CAPITAL LIGATURE AE
+0x26	U+0152		# UPPERCASE DIGRAPH OE / LATIN CAPITAL LIGATURE OE
+0x27	U+02B9		# SOFT SIGN, PRIME / MODIFIER LETTER PRIME
+0x28	U+00B7		# MIDDLE DOT
+0x29	U+266D		# MUSIC FLAT SIGN
+0x2A	U+00AE		# PATENT MARK / REGISTERED SIGN
+0x2B	U+00B1		# PLUS OR MINUS / PLUS-MINUS SIGN
+0x2C	U+01A0		# UPPERCASE O-HOOK / LATIN CAPITAL LETTER O WITH HORN
+0x2D	U+01AF		# UPPERCASE U-HOOK / LATIN CAPITAL LETTER U WITH HORN
+0x2E	U+02BE		# ALIF / MODIFIER LETTER RIGHT HALF RING
+0x2F			# <reserved>
+0x30	U+02BB		# AYN / MODIFIER LETTER TURNED COMMA
+0x31	U+0142		# LOWERCASE POLISH L / LATIN SMALL LETTER L WITH STROKE
+0x32	U+00F8		# LOWERCASE SCANDINAVIAN O / LATIN SMALL LETTER O WITH STROKE
+0x33	U+0111		# LOWERCASE D WITH CROSSBAR / LATIN SMALL LETTER D WITH STROKE
+0x34	U+00FE		# LOWERCASE ICELANDIC THORN / LATIN SMALL LETTER THORN (Icelandic)
+0x35	U+00E6		# LOWERCASE DIGRAPH AE / LATIN SMALL LIGATURE AE
+0x36	U+0153		# LOWERCASE DIGRAPH OE / LATIN SMALL LIGATURE OE
+0x37	U+02BA		# HARD SIGN, DOUBLE PRIME / MODIFIER LETTER DOUBLE PRIME
+0x38	U+0131		# LOWERCASE TURKISH I / LATIN SMALL LETTER DOTLESS I
+0x39	U+00A3		# BRITISH POUND / POUND SIGN
+0x3A	U+00F0		# LOWERCASE ETH / LATIN SMALL LETTER ETH (Icelandic)
+0x3B			# <reserved>
+0x3C	U+01A1		# LOWERCASE O-HOOK / LATIN SMALL LETTER O WITH HORN
+0x3D	U+01B0		# LOWERCASE U-HOOK / LATIN SMALL LETTER U WITH HORN
+0x3E			# <reserved>
+0x3F			# <reserved>
+0x40	U+00B0		# DEGREE SIGN
+0x41	U+2113		# SCRIPT SMALL L
+0x42	U+2117		# SOUND RECORDING COPYRIGHT
+0x43	U+00A9		# COPYRIGHT SIGN
+0x44	U+266F		# MUSIC SHARP SIGN
+0x45	U+00BF		# INVERTED QUESTION MARK
+0x46	U+00A1		# INVERTED EXCLAMATION MARK
+0x47			# <reserved>
+0x48			# <reserved>
+0x49			# <reserved>
+0x4A			# <reserved>
+0x4B			# <reserved>
+0x4C			# <reserved>
+0x4D			# <reserved>
+0x4E			# <reserved>
+0x4F			# <reserved>
+0x50			# <reserved>
+0x51			# <reserved>
+0x52			# <reserved>
+0x53			# <reserved>
+0x54			# <reserved>
+0x55			# <reserved>
+0x56			# <reserved>
+0x57			# <reserved>
+0x58			# <reserved>
+0x59			# <reserved>
+0x5A			# <reserved>
+0x5B			# <reserved>
+0x5C			# <reserved>
+0x5D			# <reserved>
+0x5E			# <reserved>
+0x5F			# <reserved>
+
+## "nonspacing" characters PRECEDE the base character.
+#0x60	U+0309		# PSEUDO QUESTION MARK / COMBINING HOOK ABOVE
+#0x61	U+0300		# GRAVE / COMBINING GRAVE ACCENT (Varia)
+#0x62	U+0301		# ACUTE / COMBINING ACUTE ACCENT (Oxia)
+#0x63	U+0302		# CIRCUMFLEX / COMBINING CIRCUMFLEX ACCENT
+#0x64	U+0303		# TILDE / COMBINING TILDE
+#0x65	U+0304		# MACRON / COMBINING MACRON
+#0x66	U+0306		# BREVE / COMBINING BREVE (Vrachy)
+#0x67	U+0307		# SUPERIOR DOT / COMBINING DOT ABOVE
+#0x68	U+0308		# UMLAUT, DIAERESIS / COMBINING DIAERESIS (Dialytika)
+#0x69	U+030C		# HACEK / COMBINING CARON
+#0x6A	U+030A		# CIRCLE ABOVE, ANGSTROM / COMBINING RING ABOVE
+#0x6B	U+FE20		# LIGATURE, FIRST HALF / COMBINING LIGATURE LEFT HALF
+#0x6C	U+FE21		# LIGATURE, SECOND HALF / COMBINING LIGATURE RIGHT HALF
+#0x6D	U+0315		# HIGH COMMA, OFF CENTER / COMBINING COMMA ABOVE RIGHT
+#0x6E	U+030B		# DOUBLE ACUTE / COMBINING DOUBLE ACUTE ACCENT
+#0x6F	U+0310		# CANDRABINDU / COMBINING CANDRABINDU
+#0x70	U+0327		# CEDILLA / COMBINING CEDILLA
+#0x71	U+0328		# RIGHT HOOK, OGONEK / COMBINING OGONEK
+#0x72	U+0323		# DOT BELOW / COMBINING DOT BELOW
+#0x73	U+0324		# DOUBLE DOT BELOW / COMBINING DIAERESIS BELOW
+#0x74	U+0325		# CIRCLE BELOW / COMBINING RING BELOW
+#0x75	U+0333		# DOUBLE UNDERSCORE / COMBINING DOUBLE LOW LINE
+#0x76	U+0332		# UNDERSCORE / COMBINING LOW LINE
+#0x77	U+0326		# LEFT HOOK (COMMA BELOW) / COMBINING COMMA BELOW
+#0x78	U+031C		# RIGHT CEDILLA / COMBINING LEFT HALF RING BELOW
+#0x79	U+032E		# UPADHMANIYA / COMBINING BREVE BELOW
+#0x7A	U+FE22		# DOUBLE TILDE, FIRST HALF / COMBINING DOUBLE TILDE LEFT HALF
+#0x7B	U+FE23		# DOUBLE TILDE, SECOND HALF / COMBINING DOUBLE TILDE RIGHT HALF
+#0x7E	U+0313		# HIGH COMMA, CENTERED / COMBINING COMMA ABOVE (Psili)
+
+0x60			# non-spacing hook above
+0x61			# non-spacing grave accent
+0x62			# non-spacing acute accent
+0x63			# non-spacing circumflex accent
+0x64			# non-spacing tilde
+0x65			# non-spacing macron
+0x66			# non-spacing breve
+0x67			# non-spacing dot above
+0x68			# non-spacing diaeresis
+0x69			# non-spacing caron
+0x6a			# non-spacing ring above
+0x6b			# non-spacing ligature left half
+0x6c			# non-spacing ligature right half
+0x6d			# non-spacing comma above right
+0x6e			# non-spacing double acute accent
+0x6f			# non-spacing candrabindu
+0x70			# non-spacing cedilla
+0x71			# non-spacing ogonek
+0x72			# non-spacing dot below
+0x73			# non-spacing diaeresis below
+0x74			# non-spacing ring below
+0x75			# non-spacing double low line
+0x76			# non-spacing low line
+0x77			# non-spacing comma below
+0x78			# non-spacing left half ring below
+0x79			# non-spacing breve below
+0x7a			# non-spacing double tilde left half
+0x7b			# non-spacing tilde right half
+0x7C			# <reserved>
+0x7D			# <reserved>
+0x7E			# non-spacing comma above
+
+#; $Date: 2002/10/06 06:00:16 $
+## license	Public Domain

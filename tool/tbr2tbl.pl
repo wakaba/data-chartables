@@ -91,16 +91,21 @@ if (/^(....)		([^\t]+)/) {
 }
 }
 sub charname ($) {
+  my $U = shift;
+  if ($U =~ /[^0-9]/) {
+    $U =~ s/^[Uu]\+|^0[Xx]//;
+    $U = hex $U;
+  }
   ## TODO: be more strict!
-  $_[0] < 0x0020 ? '<control>' :
-  $_[0] < 0x007F ? $name{$_[0]} :
-  $_[0] < 0x00A0 ? '<control>' :
-  $name{$_[0]} ? $name{$_[0]} :
-  $_[0] < 0x00A0 ? '<control>' :
-  $_[0] < 0x3400 ? '' :
-  $_[0] < 0xA000 ? '<cjk>' :
-  $_[0] < 0xE000 ? '<hangul>' :
-  $_[0] < 0xF900 ? '<private>' :
+  $U < 0x0020 ? '<control>' :
+  $U < 0x007F ? $name{$U} :
+  $U < 0x00A0 ? '<control>' :
+  $name{$U} ? $name{$U} :
+  $U < 0x00A0 ? '<control>' :
+  $U < 0x3400 ? '' :
+  $U < 0xA000 ? '<cjk>' :
+  $U < 0xE000 ? '<hangul>' :
+  $U < 0xF900 ? '<private>' :
   '';
 }
 }
@@ -132,7 +137,7 @@ sub array_to_table (@%) {
     } elsif (/^#;/) {	## Comment
     } elsif (/^#/) {	## Comment or unsupported function
       push @r, $_;
-    } elsif (/^0x($o->{except} [0-9A-Fa-f]+)\t([^\t]*)\t([^\t]*)\t(.*)/x) {
+    } elsif (/^0x($o->{except} [0-9A-Fa-f]+)(?:\t([^\t]*)(?:\t([^\t]*)(?:\t(.*))?)?)?/x) {
       my ($u, $l, $f, $m) = (hex $1, $2, $3, $4);
       $f = $o->{fallback} if $o->{fallback};
       my $offset = $o->{offset};
@@ -204,5 +209,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/06 03:32:30 $
+1; ## $Date: 2002/10/06 06:00:16 $
 ### tbr2tbl.pl ends here

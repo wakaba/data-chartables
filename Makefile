@@ -14,6 +14,7 @@ PM_jis = jisx0208_1978.pm jisx0208_1983.pm jisx0208_1990.pm \
 PM_gb = gb2312_1980.pm gb12345_1990.pm iso_ir_165.pm
 PM_ks = ksx1001_1992.pm
 PM_kps = kps9566_1997.pm
+PM_misc = iso_ir_169.pm iso_ir_231.pm
 
 jis:  $(PM_jis)
 jis-tbl:  $(PM_jis:.pm=.tbl)
@@ -23,6 +24,8 @@ ks:  $(PM_ks)
 ks-tbl:  $(PM_ks:.pm=.tbl)
 kps:  $(PM_kps)
 kps-tbl:  $(PM_kps:.pm=.tbl)
+misc:  $(PM_misc)
+misc-tbl:  $(PM_misc:.pm=.tbl)
 
 %.tbl: %.tbr $(TBR2TBL)
 	$(PERLI) $(TBR2TBL) $< > $@
@@ -38,4 +41,5 @@ clean:
 	rm -ffv $(PM_jis) $(PM_jis:.pm=.tbl) \
 	  $(PM_gb) $(PM_gb:.pm=.tbl) \
 	  $(PM_ks) $(PM_ks:.pm=.tbl) \
-	  $(PM_kps) $(PM_kps:.pm=.tbl)
+	  $(PM_kps) $(PM_kps:.pm=.tbl) \
+	  $(PM_misc) $(PM_misc:.pm=.tbl)

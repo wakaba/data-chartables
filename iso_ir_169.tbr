@@ -1,0 +1,92 @@
+#?PETBL/1.0 SOURCE
+## name	Blissymbol (ISO-IR 169) (GL encoding)
+#?o table-name="iso_ir_169"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="F"
+0x2121	U+0020		
+0x2122			# blissymbol error mark
+0x2123	U+0021
+0x2124	U+0025
+0x2125	U+003F
+0x2126	U+002E
+0x2127	U+002C
+0x2128	U+003A
+## 0x2129-0x212F  These positions shall not be used
+0x2130	U+0030
+0x2131	U+0031
+0x2132	U+0032
+0x2133	U+0033
+0x2134	U+0034
+0x2135	U+0035
+0x2136	U+0036
+0x2137	U+0037
+0x2138	U+0038
+0x2139	U+0039
+## 0x213A-0x227E  These positions shall not be used
+0x2321	U+02C4		# blissymbol action indicator
+0x2322	U+02C3		# blissymbol active indicator
+0x2323			# blissymbol conditional indicator
+0x2324			# blissymbol description after the fact indicator
+0x2325			# blissymbol description before the fact indicator
+0x2326	U+02C5		# blissymbol description indicator
+0x2327			# blissymbol future action indicator
+0x2328			# blissymbol future conditional indicator
+0x2329			# blissymbol future passive indicator
+0x232A			# blissymbol future passive conditional indicator
+0x232C			# blissymbol past action indicator
+0x232D			# blissymbol past conditional indicator
+0x232E			# blissymbol past passive indicator
+0x232F			# blissymbol past passive conditional indicator
+0x2330			# blissymbol present passive conditional indicator
+0x2331			# blissymbol thing indicator
+0x2332			# blissymbol thing or plural indicator
+0x2333			# blissymbol plural indicator
+## 0x2334-0x2F7E  These positions shall not be used
+## 0x3021-0x482B  blissymbols
+0x3033	U+002B		# blissymbol adition symbol (gain)
+0x3042	U+21C9		# blissymbol agreement symbol
+0x3033	U+FE62		# blissymbol and symbol (also, plus, too)
+0x3058	U+2220		# blissymbol angle symbol
+0x3142	U+21C4		# blissymbol back and forth symbol (to and fro)
+0x3145	U+2190		# blissymbol backward symbol (back)
+0x3172	U+21A6		# blissymbol beginning symbol (start)
+0x3177	U+02D6		# blissymbol belongs to symbol (possessibe of)
+0x324B	U+25EB		# blissymbol book symbol
+0x334E	U+25B7		# blissymbol cause symbol
+0x3527	U+25B3		# blissymbol creation symbol (nature)
+0x3621	U+00F7
+0x3627	U+0024
+0x362D	U+2193
+0x362E	U+2199
+0x362F	U+2198
+0x364D	U+005F
+0x366E	U+25A1		# blissymbol enclosure symbol
+0x3754	U+2661
+0x3756	U+25B6		# blissymbol female gender symbol
+0x3836	U+2192
+0x3B5E	U+2709		# blissymbol letter symbol (mail, post)
+0x3C72	U+2212
+0x3D2F	U+22BF		# blissymbol mountain symbol
+0x3D39	U+00D7
+0x3E5C	U+2225
+0x3F63	U+25F3		# blissymbol postcard symbol
+0x404F	U+003E
+0x4060	U+003C
+0x4123	U+25CE		# blissymbol ring symbol
+0x4149	U+003D
+0x426E	U+203E		# blissymbol sky symbol
+0x4363	U+2721
+0x4364	U+002A		# blissymbol star symbol
+0x4436	U+25CB		# blissymbol sun symbol
+0x453C	U+219B		# blissymbol through symbol
+0x463F	U+2191
+0x4640	U+21C5
+0x4642	U+2196
+0x4643	U+2197
+0x4721	U+301C		# blissymbol water symbol
+0x4735	U+FE56		# blissymbol what question mark symbol
+0x4775	U+00A5
+## 0x482C-0x7E7E  These positions shall not be used
+#; $Date: 2002/10/06 06:00:16 $
+## License: Public Domain.
