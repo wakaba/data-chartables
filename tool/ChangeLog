@@ -1,3 +1,7 @@
+2002-10-13  Wakaba <w@suika.fam.cx>
+
+	* esr2pm.pl: New script.  (Thanks to Nanashi-san.)
+
 2002-10-05  Nanashi-san
 
 	* *.pl: New scripts.  (Commited by Wakaba <w@suika.fam.cx>.)
