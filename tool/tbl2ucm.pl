@@ -16,8 +16,11 @@ if (/^0x([0-9A-F]+)\tU\+([0-9A-F]+)\t([^\t]*)\t# ?(.*)/) {
   if ($info =~ /<->/) { $l[-1]->{fallback} = 0 }
   elsif ($info =~ /<-/) { $l[-1]->{fallback} = 1 }
   elsif ($info =~ /->/) { $l[-1]->{fallback} = 3 }
-} elsif (/^## ([a-z0-9:_-]+)\t(.+)/) {
-  $i{$1} = $2;
+} elsif (/^#\?o ([a-z0-9:_<>-]+)="(.+)"/) {
+  my ($n,$v) = ($1,$2);  $v =~ s/\\(.)/$1/g;
+  $i{$n} = $i{$n} ? $i{$n} . "\t" . $v : $v;
+} elsif (/^## ([a-z0-9:_<>-]+)\t(.+)/) {
+  $i{$1} = $i{$1} ? $i{$1} . "\t" . $2 : $2;
 }
 }
 
@@ -28,14 +31,14 @@ print <<EOH;
 <code_set_name>  "@{[ $i{'ucm:code_set_name'} || $i{name} ]}"
 @{[&{sub{
   my $s = '';
-  for (sort split /\t/, $i{'ucm:code_set_alias'}) {
+  for (sort split /\t/, lc $i{'ucm:code_set_alias'}) {
     $s .= sprintf '<code_set_alias> "%s"%s', $_, "\n";
   }
   $s;
 }}]}<mb_cur_min> @{[ $i{'ucm:mb_cur_min'} || 1 ]}
 <mb_cur_max> @{[ $i{'ucm:mb_cur_max'} || 1 ]}
 <subchar> @{[&{sub{
-  my $s = uc $i{'ucm:subchar'}|| $i{'<-ucs-substition'} || $i{substition} || '0x3F';
+  my $s = uc ($i{'ucm:subchar'}||$i{'<-ucs-substition'}||$i{substition} || '0x3F');
   $s =~ s/^[0\\]X/\\x/;
   $s =~ s/^\\x([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])/\\x$1\\x$2/;
   $s;
@@ -72,5 +75,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/05 01:34:55 $
+1; ## $Date: 2002/12/12 07:45:17 $
 ### tbl2ucm.pl ends here

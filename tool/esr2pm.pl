@@ -23,23 +23,81 @@ while (<>) {
       $section = $1;
     } elsif (/^\t(.*)$/) {
       my $l = $1;
-      if ($section == 'Encode' || $section == 'Decode') {
-        if ($l =~ /^->(.+)$/) {
+      if ($section == 'Encode' || $section == 'Decode' || $section == 'Cversion') {
+        if ($l =~ /^->(.+):C$/) {
+          my $name = $1;
+          if ($name eq 'iso2022') {
+            $l = q($s = Encode::ISO2022::internal_to_iso2022 ($s, $C););
+          } elsif ($name eq 'sjis') {
+            $l = q($s = Encode::SJIS::internal_to_sjis ($s, $C););
+          }
+        } elsif ($l =~ /^->(.+)$/) {
           $l = qq(my \$e = Encode::find_encoding (q($1))->__clone;\n\$e->{_encode_mapping} = 0;\n\$s = \$e->encode (\$s););
+          $Info{__use_clone} = 1;
+        } elsif ($l =~ /^<-(.+):C$/) {
+          my $name = $1;
+          if ($name eq 'iso2022') {
+            $l = q($s = Encode::ISO2022::iso2022_to_internal ($s, $C););
+          } elsif ($name eq 'sjis') {
+            $l = q($s = Encode::SJIS::sjis_to_internal ($s, $C););
+          }
         } elsif ($l =~ /^<-(.+)$/) {
           $l = qq(my \$e = Encode::find_encoding (q($1))->__clone;\n\$e->{_decode_mapping} = 0;\n\$s = \$e->decode (\$s););
         } elsif ($l =~ /^(?:<=|=>)(.+)$/) {
           $l = qq(\$s = Encode::Table::convert (\$s, [qw($1)], \%tblopt) if \$tbl;);
         } elsif ($l =~ /^utf8:o(n|ff)$/) {
           $l = qq(Encode::_utf8_o$1 (\$s););
+        } elsif ($l =~ /^C:([GC][^=:]+)=([^:]+):([^\t]+)(\t\s*\#\#.+)?$/) {
+          $l = qq(\$C->{$1} = \$Encode::Charset::CHARSET{$2}->{'$3'};$4);
+        } elsif ($l =~ /^C:option:([^=]+)=(.+)(\s+\#\#.+)?$/) {
+          $l = qq(\$C->{option}->$1 = $2;$3);
+        } elsif ($l =~ /^C:designate:\*:default=(-?[0-3]+)$/) {
+          $l = qq(\$C->{option}->{designate_to}->{G94}->{default} = $1;\n).
+               qq(\$C->{option}->{designate_to}->{G96}->{default} = $1;\n).
+               qq(\$C->{option}->{designate_to}->{G94n}->{default} = $1;\n).
+               qq(\$C->{option}->{designate_to}->{G96n}->{default} = $1;\n).
+               qq(\$C->{option}->{designate_to}->{C0}->{default} = $1;\n).
+               qq(\$C->{option}->{designate_to}->{C1}->{default} = $1;);
+        } elsif ($l =~ /^C:designate:\*drcs:default=(-?[0-3]+)$/) {
+          $l = qq(for (0x30..0x7E) {\n).
+               qq(my \$F = chr \$_;\n).
+               qq(  \$C->{option}->{designate_to}->{G94}->{\$F} = $1;\n).
+               qq(  \$C->{option}->{designate_to}->{G96}->{\$F} = $1;\n).
+               qq(  \$C->{option}->{designate_to}->{G94n}->{\$F} = $1;\n).
+               qq(  \$C->{option}->{designate_to}->{G96n}->{\$F} = $1;\n).
+               qq(});
+        } elsif ($l =~ /^C:designate:\*private:default=(-?[0-3]+)$/) {
+          $l = qq(for (0x30..0x3F) {\n).
+               qq(  my \$F = chr \$_;\n).
+               qq(  for my \$c (qw/G94 G96 G94n G96n C0 C1/) {\n).
+               qq(    \$C->{option}->{designate_to}->{\$c}->{\$F} = $1;\n).
+               qq(    \$C->{option}->{designate_to}->{\$c}->{'\x21'.\$F} = $1;\n).
+               qq(    \$C->{option}->{designate_to}->{\$c}->{'\x22'.\$F} = $1;\n).
+               qq(    \$C->{option}->{designate_to}->{\$c}->{'\x23'.\$F} = $1;\n).
+               qq(  }\n);
+               qq(});
+        } elsif ($l =~ /^C:designate:([^:=]+):([^=]+)=(-?[0-3]+)(\s+\#\#.+)?$/) {
+          $l = qq(\$C->{option}->{designate_to}->{$1}->{'$2'} = $3;$4);
+        } elsif ($l =~ /^C:([GC][LR])=undef$/) {
+          $l = qq(\$C->{$1} = undef;);
+        } elsif ($l =~ /^C:([GC][LR])=(..)$/) {
+          $l = qq(\$C->{$1} = '$2';);
+        } elsif ($l =~ /^C:bit=([78])$/) {
+          $l = qq(\$C->{bit} = $1;);
         } elsif ($l =~ /^use:table:(.+)$/) {
           $l = qq(eval q(use Encode::Table::$1) unless \$Encode::Table::$1::VERSION;);
+        } elsif ($l =~ /^require:private:(.+)$/) {
+          $l = qq(eval q(use Encode::Charset::Private q(:$1)) or die \$\@;);
+        } elsif ($l =~ /^use:private:(.+)$/) {
+          $l = qq(eval q(use Encode::Charset::Private q(:$1)) or die \$\@;\neval q(Encode::Charset::Private::designate_$1 (\$C)););
         } elsif ($l =~ /^use:(.+)$/) {
           $l = qq(eval q(use $1) unless \$$1::VERSION;);
+        } elsif ($l =~ /^\#;/) {
+          $l = undef;
         }
       }
       if ($item{$section}) {
-        $item{$section} .= "\n".$l;
+        $item{$section} .= "\n".$l if defined $l;
       } else {
         $item{$section} = $l;
       }
@@ -91,13 +149,27 @@ $Info{'POD:ENCODING:PREAMBLE'}
 EOH
 
 for my $encode (@{ $Info{encoding} }) {
-  for my $ED (qw/Encode Decode/) {
+  for my $ED (qw/Encode Decode Cversion/) {
     my $ed = lc $ED;
     if ($encode->{$ED} =~ /Encode::Table/) {
       $encode->{$ED} = q/require Encode::Table;
 my $tbl = defined $obj->{_/.$ed.q/_mapping} ? $obj->{_/.$ed.q/_mapping} : 1;
 my %tblopt = (-autoload => defined $obj->{_/.$ed.q/_mapping_autoload} ? $obj->{_/.$ed.q/_mapping_autoload} : 1);
 /.$encode->{$ED};
+    }
+    if ($encode->{$ED} =~ /\$C/) {
+      if ($ED ne 'Cversion' && $encode->{Cversion}) {
+        $encode->{$ED} = qq(my \$C = \$obj->__code_version;\n).$encode->{$ED};
+      } elsif ($encode->{$ED} =~ /SJIS/i) {
+        $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object_sjis;\n).$encode->{$ED};
+      } else {
+        $encode->{$ED} = qq(require Encode::Charset;\nmy \$C = &Encode::Charset::new_object;\n).$encode->{$ED};
+      }
+    }
+    for (qw/ISO2022 SJIS/) {
+      if ($encode->{$ED} =~ /Encode::$_/) {
+        $encode->{$ED} = qq(require Encode::$_;\n).$encode->{$ED};
+      }
     }
     $encode->{$ED} =~ s/\n/\n  /g;
   }
@@ -128,7 +200,11 @@ sub decode (\$\$;\$) {
   \$_[1] = '' if \$chk;
   return \$s;
 }
-
+@{[ $encode->{Cversion} ? qq(
+sub __code_version (\$) {
+  $encode->{Cversion}
+  \$C;
+}):'']}
 EOH
 }
 
@@ -139,11 +215,11 @@ print <<EOH;
 $Info{'POD:ENCODING:POSTAMBLE'}
 ) : '']}
 =cut
-
-sub Encode::Encoding::__clone (\$) {
-  my \$self = shift;
-  bless {%\$self}, ref \$self;
-}
+@{[$Info{__use_clone} ? q(
+sub Encode::Encoding::__clone ($) {
+  my $self = shift;
+  bless {%$self}, ref $self;
+}):'']}
 
 EOH
 
@@ -186,10 +262,25 @@ and/or modify it under the same terms as Perl itself.},
     ReferenceIANAREG => q([IANAREG] "CHARACTER SETS", IANA <http://www.iana.org/>,
 <http://www.iana.org/assignments/character-sets>.
 The charset registry for IETF <http://www.ietf.org/> standards.),
-    ReferenceJISX0212_1995 => q(JIS X 0221-1995, "Universal multi-octet coded character
+    ReferenceJISX0208_1978 => q(JIS C 6226 (JIS X 0208)-1978, "Code of Japanese graphic
+character set for information interchange", Japan Industrial Standards
+Committee (JISC) <http://www.jisc.go.jp/>, 1978.),
+    ReferenceJISX0208_1983 => q(JIS C 6226 (JIS X 0208)-1983, "Code of Japanese graphic
+character set for information interchange", Japan Industrial Standards
+Committee (JISC) <http://www.jisc.go.jp/>, 1983.),
+    ReferenceJISX0208_1990 => q(JIS X 0208-1990, "Code of Japanese graphic character
+set for information interchange", Japan Industrial Standards
+Committee (JISC) <http://www.jisc.go.jp/>, 1990.),
+    ReferenceJISX0212_1990 => q(JIS X 0212-1990, "Code of supplementary Japanese graphic
+character set for information interchange", Japan Industrial Standards
+Committee (JISC) <http://www.jisc.go.jp/>, 1990.),
+    ReferenceJISX0221_1995 => q(JIS X 0221-1995, "Universal multi-octet coded character
 set (UCS)", Japan Industrial Standards Committee
 <http://www.jisc.go.jp/>, 1995.  IDT with ISO/IEC 10646-1:1993
 but three additional appendixes.),
+    ReferenceJISX0201_1997 => q(JIS X 0201:1997, "7-bit and 8-bit coded character
+set for information interchange", Japan Industrial Standards
+Committee (JISC) <http://www.jisc.go.jp/>, 1997.),
     ReferenceJISX0208_1997 => q(JIS X 0208:1997, "7-bit and 8-bit double byte coded Kanji
 set for information interchange", Japan Industrial Standards
 Committee (JISC) <http://www.jisc.go.jp/>, 1997.),
@@ -206,7 +297,8 @@ J. Murai, et al, IETF <http://www.ietf.org/>, June 1993.
 
 =head1 SEE ALSO
 
-L<Encode>, L<Encode::Table>
+L<Encode>, L<Encode::Table>,
+SuikaWiki:esr2pm <http://suika.fam.cx/~wakaba/-temp/wiki/wiki?esr2pm>
 
 =head1 LICENSE
 
@@ -221,5 +313,4 @@ holder of this script does not claim any right to them.
 
 =cut
 
-# $Date: 2002/10/14 06:56:53 $
-### esr2pm.pl ends here
+# $Date: 2002/12/12 07:45:17 $

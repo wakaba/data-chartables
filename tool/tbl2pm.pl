@@ -90,8 +90,7 @@ C<$option{table_name}.tbr>.)
 
 package Encode::Table::$option{table_name};
 use strict;
-use vars qw/%L2U %U2L \$VERSION/;
-\$VERSION = q(@{[sprintf '%04d.%02d%02d', (gmtime)[5]+1900, (gmtime)[4]+1, (gmtime)[3]]});
+our \$VERSION = q(@{[sprintf '%04d.%02d%02d', (gmtime)[5]+1900, (gmtime)[4]+1, (gmtime)[3]]});
 
 ## These tables are embeded in binary, so that your editor
 ## might break the data or might hang up.
@@ -106,14 +105,14 @@ use vars qw/%L2U %U2L \$VERSION/;
 
 #
 
-%L2U = map {Encode::_utf8_on (\$_) if length \$_ > 1; \$_} unpack
+our %L2U = map {Encode::_utf8_on (\$_) if length \$_ > 1; \$_} unpack
 (q{$pack}, <<'END');
 EOH
 
 print $tbl,"\nEND\n";
 
 print <<EOH;
-%U2L = reverse %L2U;
+our %U2L = reverse %L2U;
 sub import {
   \$Encode::Table::TABLE{$option{table_name}_to_ucs} = \\%L2U;
   \$Encode::Table::TABLE{ucs_to_$option{table_name}} = \\%U2L;
@@ -144,5 +143,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/10/12 07:27:01 $
+1; ## $Date: 2002/12/12 07:45:17 $
 ### tbl2pm.pl ends here

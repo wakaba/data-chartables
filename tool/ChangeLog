@@ -1,3 +1,11 @@
+2002-10-30  Nanashi-san  <nanashi@nanashi.invalid>
+
+	* winapi2tbl.pl: New script.
+	* typo2tbl.pl: Likewise.
+	* ucm2tbl.pl: Likewise.
+	(Commited by Wakaba <w@suika.fam.cx>, 2002-12-12 (sorry
+	for very very late commit...))
+
 2002-10-13  Wakaba <w@suika.fam.cx>
 
 	* esr2pm.pl: New script.  (Thanks to Nanashi-san.)
