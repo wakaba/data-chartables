@@ -1,0 +1,9 @@
+#?PETBL/1.0 SOURCE
+## name GB 2312-80 (GL encoding)
+#?o table-name="gb2312_1980"
+#?o charset-chars="94"
+#?o charset-dimension="2"
+#?o charset-final-byte="A"
+#?import src="gl-gb2312-common.tbr" mode="fullwidth,MIDDLE-DOT,EM-DASH,nonhan-unicode"
+#; $Date: 2002/10/05 23:36:10 $
+## License: Public Domain.
