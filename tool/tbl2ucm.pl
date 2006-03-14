@@ -48,7 +48,14 @@ CHARMAP
 EOH
 
 for (@l) {
-  printf q{<U%04X> \x%02X |%d # %s}, $_->{ucs}, $_->{local}, $_->{fallback}, $_->{comment}."\n";
+  my $localv = $_->{local};
+  my $local = '';
+  $local = '\x00' if $localv == 0;
+  while ($localv) {
+    $local = (sprintf '\x%02X', $localv % 0x100) . $local;
+    $localv >>= 8;
+  }
+  printf q{<U%04X> %s |%d # %s}, $_->{ucs}, $local, $_->{fallback}, $_->{comment}."\n";
 }
 
 print "END CHARMAP\n";
@@ -75,5 +82,5 @@ author of source data.
 
 =cut
 
-1; ## $Date: 2002/12/12 07:45:17 $
+1; ## $Date: 2006/03/14 04:47:32 $
 ### tbl2ucm.pl ends here

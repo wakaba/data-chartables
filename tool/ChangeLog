@@ -1,3 +1,7 @@
+2006-03-14  Wakaba  <wakaba@suika.fam.cx>
+
+	* tbl2ucm.pl: Multibyte encodings were not supported.
+
 2002-12-18  Wakaba  <w@suika.fam.cx>
 
 	* esr2pm.pl:  New command '!&' is supported.
