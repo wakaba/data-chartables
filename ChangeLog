@@ -1,3 +1,9 @@
+2008-11-08  Wakaba  <wakaba@suika.fam.cx>
+
+	* euc_jp_open_ascii.tbr: New file.
+
+	* Makefile: A rule for "euc_jp_open_ascii.tbl" is added.
+
 2002-12-19  Wakaba  <w@suika.fam.cx>
 
 	* gl-jisx0208-to-katakana.tbr, gl-cjk-katakana-hw.tbr,

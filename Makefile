@@ -48,6 +48,11 @@ misc-tbl:  $(PM_misc:.pm=.tbl)
 %.tbl: %.tbr $(TBR2TBL)
 	$(PERLI) $(TBR2TBL) $< > $@
 
+euc_jp_open_ascii.tbl: euc_jp_open_ascii.tbr $(TBR2TBL) \
+  jisx0208_1990_open_ascii.tbl \
+  jisx0212_1990_open_ascii.tbl
+	$(PERLI) $(TBR2TBL) $< > $@
+
 %.ucm: %.tbl $(TBL2UCM)
 	$(PERLI) $(TBL2UCM) $< > $@
 

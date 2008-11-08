@@ -1,3 +1,8 @@
+2008-11-08  Wakaba  <wakaba@suika.fam.cx>
+
+	* tbr2tbl.pl (array_to_table): Always use character name from
+	Perl's table.
+
 2006-03-14  Wakaba  <wakaba@suika.fam.cx>
 
 	* tbl2ucm.pl: Multibyte encodings were not supported.

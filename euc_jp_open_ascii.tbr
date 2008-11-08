@@ -1,0 +1,78 @@
+#?PETBL/1.0 SOURCE
+## name	eucJP-open-ascii-nec
+#?o charset-name="euc_jp_open_ascii_nec"
+
+## NOTE: Based on eucJP-open, NEC extension symbols (row 13) and
+## NEC-selected IBM extensions are added.  Private-use mappings for
+## 0xF9xx-0xFCxx are removed due to duplication with NEC-selected IBM
+## extensions.  Note also that characters in G1 are preferred to
+## characters in G3 even if they are part of vendor extension area for
+## compatibility with Microsoft's CP51932.
+
+#?import std-cl
+#?import std-0x20
+#?import src="gl-iso-646-alphanumeric.tbr"
+#?import src="gl-iso-646-symbol.tbr"
+#?import std-0x7F
+0x80	U+0080	
+0x81	U+0081	
+0x82	U+0082	
+0x83	U+0083	
+0x84	U+0084	
+0x85	U+0085	
+0x86	U+0086	
+0x87	U+0087	
+0x88	U+0088	
+0x89	U+0089	
+0x8A	U+008A	
+0x8B	U+008B	
+0x8C	U+008C	
+0x8D	U+008D	
+
+0x90	U+0090	
+0x91	U+0091	
+0x92	U+0092	
+0x93	U+0093	
+0x94	U+0094	
+0x95	U+0095	
+0x96	U+0096	
+0x97	U+0097	
+0x98	U+0098	
+0x99	U+0099	
+0x9A	U+009A	
+0x9B	U+009B	
+0x9C	U+009C	
+0x9D	U+009D	
+0x9E	U+009E	
+0x9F	U+009F	
+#?import std-0xA0
+
+#?import src="jisx0208_1990_open_ascii.tbl" right except="7[9-C]"
+
+#; CP932 extended characters
+#?import src="gl-cp932-ms-nec-nonhan.tbr" right
+#?import src="gl-cp932-nec-ibm.tbr" right
+
+#?import src="jisx0201_katakana_hw.tbr" offset="8E80"
+
+#?import src="jisx0212_1990_open_ascii.tbl" offset="8F8080" except="2271|737[DE]|742[1-8BCD]"
+
+0x8FA2F1	U+2116	->	# NUMERO SIGN
+0x8FF3FD	U+2160	->	# ROMAN NUMERAL ONE
+0x8FF3FE	U+2161	->	# ROMAN NUMERAL TWO
+0x8FF4A1	U+2162	->	# ROMAN NUMERAL THREE
+0x8FF4A2	U+2163	->	# ROMAN NUMERAL FOUR
+0x8FF4A3	U+2164	->	# ROMAN NUMERAL FIVE
+0x8FF4A4	U+2165	->	# ROMAN NUMERAL SIX
+0x8FF4A5	U+2166	->	# ROMAN NUMERAL SEVEN
+0x8FF4A6	U+2167	->	# ROMAN NUMERAL EIGHT
+0x8FF4A7	U+2168	->	# ROMAN NUMERAL NINE
+0x8FF4A8	U+2169	->	# ROMAN NUMERAL TEN
+0x8FF4AB	U+3231	->	# PARENTHESIZED IDEOGRAPH STOCK
+0x8FF4AC	U+2116	->	# NUMERO SIGN
+0x8FF4AD	U+2121	->	# TELEPHONE SIGN
+
+#?std-0xFF
+
+#; $Date: 2008/11/08 04:25:59 $
+## license	Public Domain
