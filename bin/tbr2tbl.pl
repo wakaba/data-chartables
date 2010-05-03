@@ -152,7 +152,8 @@ sub array_to_table (@%) {
   @r;
 }
 
-my $input_f;
+our $input_f;
+local $input_f;
 
 $CMD{import} = sub {
   my ($opt0, $opt) = @_;
@@ -161,6 +162,7 @@ $CMD{import} = sub {
     my $included_f = $input_f->dir->file ($opt->{src});
     open TBL, '<', $included_f->stringify
         or die "$0: $included_f: Imported table not found";
+    local $input_f = $included_f;
     my @tbl = <TBL>;  close TBL;  map {s/[\x0D\x0A]+$//} @tbl;
     my $m = {}; for (split /,/, $opt->{mode}) { $m->{$_} = 1 }
     shift (@tbl) if $tbl[0] =~ m!^#\?PETBL/1.0 SOURCE!;
@@ -186,8 +188,9 @@ while (<>) {
 }
 shift (@src) if $src[0] =~ m!^#\?PETBL/1.0 SOURCE!;
 @src = sort {
-$a =~ /^#/ ? 0 :
-$b =~ /^#/ ? 0 : $a cmp $b
+#$a =~ /^#/ ? 0 :
+#$b =~ /^#/ ? 0 :
+$a cmp $b
 } array_to_table (\@src);
 
 binmode STDOUT;
