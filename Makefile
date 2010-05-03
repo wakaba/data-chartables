@@ -15,7 +15,7 @@ PM_jis = jisx0208_1978.pm jisx0208_1978_irv.pm \
   jisx0212_1990_open_ms.pm \
   jisx0213_2000_1.pm jisx0213_2000_1_esc_24_42.pm jisx0213_2000_2.pm \
   jisx0201_latin.pm jisx0201_katakana.pm ascii_yen.pm \
-  jisx0208_to_katakana.pm
+  jisx0208_to_katakana_hw.pm
 PM_gb = gb2312_1980.pm gb12345_1990.pm iso_ir_165.pm
 PM_ks = ksx1001_1992.pm
 PM_kps = kps9566_1997.pm
@@ -24,7 +24,8 @@ PM_misc = iso_ir_231.pm
 PM_iso8859 = isoiec8859_2.pm isoiec8859_3.pm isoiec8859_4.pm \
   isoiec8859_5.pm isoiec8859_6.pm isoiec8859_7.pm \
   isoiec8859_8.pm isoiec8859_8_1999.pm isoiec8859_9.pm \
-  isoiec8859_10.pm isoiec8859_11.pm isoiec8859_13.pm \
+  isoiec8859_10.pm #isoiec8859_11.pm \
+  isoiec8859_13.pm \
   isoiec8859_14.pm isoiec8859_15.pm isoiec8859_16.pm \
   iso_ir_204.pm iso_ir_205.pm iso_ir_206.pm
 
