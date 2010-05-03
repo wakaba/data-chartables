@@ -69,7 +69,7 @@ all: all-tbl $(TBL_ALL:.tbl=.ucm)
 all-tbl: $(TBL_GEN) tbl-static-copy
 
 tbl-static-copy: $(TBL_STATIC_ORIG)
-	$(CP) $(TBL_STATIC_ORIG) $(RESULT_DIR)
+	$(CP) --update $(TBL_STATIC_ORIG) $(RESULT_DIR)
 
 $(RESULT_DIR)%.tbl: $(SOURCE_DIR)%.tbr $(TBR2TBL)
 	$(PERLI) $(TBR2TBL) $< > $@

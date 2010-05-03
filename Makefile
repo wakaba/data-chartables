@@ -31,7 +31,7 @@ TBL_iso8859 = $(RESULT_DIR)isoiec8859_2.tbl $(RESULT_DIR)isoiec8859_3.tbl $(RESU
   $(RESULT_DIR)isoiec8859_14.tbl $(RESULT_DIR)isoiec8859_15.tbl $(RESULT_DIR)isoiec8859_16.tbl \
   $(RESULT_DIR)iso_ir_204.tbl $(RESULT_DIR)iso_ir_205.tbl $(RESULT_DIR)iso_ir_206.tbl
 
-all: jis gb ks kps iso8859 photograph misc
+all: jis gb ks kps iso8859 photograph misc cp-all
 
 jis:  $(TBL_jis)
 jis-tbl:  $(TBL_jis)
@@ -58,6 +58,9 @@ $(RESULT_DIR)euc_jp_open_ascii.tbl: $(SOURCE_DIR)euc_jp_open_ascii.tbr $(TBR2TBL
 
 $(RESULT_DIR)%.ucm: $(RESULT_DIR)%.tbl $(TBL2UCM)
 	$(PERLI) $(TBL2UCM) $< > $@
+
+cp-all:
+	cd cp && make all
 
 clean:
 	rm -rfv *.BAK .*.BAK *~ .*~
