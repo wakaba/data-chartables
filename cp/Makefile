@@ -6,7 +6,8 @@ TBR2TBL = $(PLDIR)tbr2tbl.pl
 TBL2UCM = $(PLDIR)tbl2ucm.pl
 TBL2PM = $(PLDIR)tbl2pm.pl
 
-TBL_GEN = cp437-ms-1996.tbl cp437-ms-1996.tbl \
+TBL_GEN = fullwidth.tbl \
+	  cp437-ms-1996.tbl cp437-ms-1996.tbl \
           cp850-ms-1996.tbl cp850-ms-1996.tbl \
           cp874-ms-2000.tbl \
           cp932-ms-1996.tbl cp932-ms-1997.tbl \
@@ -44,8 +45,9 @@ TBL_ALL = $(TBL_GEN) \
           cp20261-ms.tbl cp20127-ms-2000.tbl \
           cp20269-ms-1996.tbl cp20290-ms.tbl \
           cp20866-ms-1996.tbl \
-          cp20932-ms.tbl cp20936-ms.tbl cp20949-ms.tbl \
-          cp21027-ms.tbl cp21866-ms-1996.tbl \
+          cp20932-ms-2000.tbl cp20932-ms-2001.tbl \
+	  cp20936-ms.tbl cp20949-ms.tbl \
+          cp21027-ms.tbl cp21866-ms-1997.tbl \
           cp28591-ms-1996.tbl \
           cp28592-ms-1995.tbl cp28592-ms-1996.tbl \
           cp28593-ms-1995.tbl cp28593-ms-1996.tbl \
