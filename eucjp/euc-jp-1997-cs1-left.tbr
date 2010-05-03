@@ -1,0 +1,3 @@
+#?PETBL/1.0 SOURCE
+#?o license="Public Domain"
+#?import src="../source/gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"
