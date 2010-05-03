@@ -1,15 +1,5 @@
 #!/usr/bin/perl
 
-=head1 NAME
-
-ucm2tbl --- Mapping table converter, ucm to PETBL/1.0 format
-
-=head1 USAGE
-
- $ perl ucm2tbl.pl cp932.ucm > cp932.tbl
-
-=cut
-
 use strict;
 {
 my @name = split /\n/, require 'unicore/Name.pl';
@@ -61,15 +51,31 @@ while (<>) {
 }
 print sort @char;
 
-=head1 AUTHOR
+__END__
 
-Nanashi-san (SuikaWiki:WindowsCodePage
-<http://suika.fam.cx/~wakaba/-temp/wiki/wiki?WindowsCodePage>)
+=head1 NAME
+
+ucm2tbl.pl - Charset table converter, ucm -> tbl
+
+=head1 SYNOPSIS
+
+  $ perl ucm2tbl.pl source.ucm > generated.tbl
+
+=head1 SEE ALSO
+
+L<perlunicode>, L<enc2xs>, L<tbr2tbl.pl>, L<tbl2ucm.pl>.
+
+SuikaWiki:WindowsCodePage
+<http://suika.fam.cx/~wakaba/wiki/sw/n/WindowsCodePage>.
+
+=head1 AUTHORS
+
+Nanashi-san.
+
+This script is currently maintained by Wakaba <w@suika.fam.cx>.
 
 =head1 LICENSE
 
 Public Domain.
 
 =cut
-
-# $Date: 2002/12/12 07:45:49 $

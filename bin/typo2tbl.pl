@@ -1,16 +1,4 @@
 #!/usr/bin/perl
-
-=head1 NAME
-
-typo2tbl --- Mapping table converter, Microsoft typography's table
-to our tbl format
-
-=head1 USAGE
-
- $ perl typo2tbl.pl 932.txt > ms932.tbl
-
-=cut
-
 use v5.8.0;
 use strict;
 my %add_hdr = (
@@ -90,20 +78,35 @@ print "#; This file is auto-generated (at @{[ sprintf '%04d-%02d-%02dT%02d:%02d:
 print join "\n", @hdr, sort @t;
 print "\n";
 
+__END__
+
+=head1 NAME
+
+typo2tbl.pl - Charset table converter, Microsoft typography's table ->
+tbl
+
+=head1 SYNOPSIS
+
+ $ perl typo2tbl.pl 932.txt > ms932.tbl
+
 =head1 SEE ALSO
 
-Character sets and codepages (Microsoft typography)
-<http://www.microsoft.com/typography/unicode/cscp.htm> 
+L<tbl2ucm.pl>.
+
+Character sets and codepages (Microsoft typography),
+<http://www.microsoft.com/typography/unicode/cscp.htm>.
+
+SuikaWiki:WindowsCodePage
+<http://suika.fam.cx/~wakaba/wiki/sw/n/WindowsCodePage>.
 
 =head1 AUTHOR
 
-Nanashi-san (SuikaWiki:WindowsCodePage
-<http://suika.fam.cx/~wakaba/-temp/wiki/wiki?WindowsCodePage>)
+Nanashi-san.
+
+This script is currently maintained by Wakaba <w@suika.fam.cx>.
 
 =head1 LICENSE
 
 Public Domain.
 
 =cut
-
-# $Date: 2002/12/12 07:45:49 $

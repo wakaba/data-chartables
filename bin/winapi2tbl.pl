@@ -1,15 +1,4 @@
 #!/usr/bin/perl
-
-=head1 NAME
-
-winapi2tbl --- Mapping table generator (from Win32 API)
-
-=head1 USAGE
-
- $ perl winapi2tbl.pl 932 > winapi-cp932.tbl
-
-=cut
-
 use strict;
 require Win32::API;
 
@@ -162,34 +151,52 @@ print "#; This file is auto-generated (at @{[ sprintf '%04d-%02d-%02dT%02d:%02d:
 print join "\n", @hdr, sort @t;
 print "\n";
 
-=head1 REQUIRES
+__END__
 
-L<Win32::API> (MUST), unicore/Name.pl (MUST; in perl 5.8.0),
-L<Message::Field::UA> (SHOULD)
+=head1 NAME
+
+winapi2tbl.pl - Charset table generator based on Win32 API
+
+=head1 SYNOPSIS
+
+ $ perl winapi2tbl.pl 932 > winapi-cp932.tbl
+
+=head1 DEPENDENCY
+
+L<unicore/Name.pl> - provided as part of standard Perl distribution.
+
+L<Win32::API>.
+
+L<Message::Field::UA> - provided as part of manakai
+<http://suika.fam.cx/www/manakai-core/doc/web/>.  This module is
+optional.
 
 =head1 BUGS
 
-0x00 or U+0000 can't be treated correctly so that
-0x00 <-> U+0000 is hardcoded.  This may cause problem
-if the code page does not have 0x00 <-> U+0000 mapping.
+Convertion from or to 0x00 and U+0000 cannot be handled correctly
+using this script.  This scripts assumes there is 0x00 <-> U+0000
+mapping rule for the codepage.  For most if not all codepages this
+assumption is true.  However, for some codepages there is oneway
+mapping to U+0000.  For example, CP20127, a Microsoft's variant of
+US-ASCII, maps 0x80 into U+0000, which cannot detected by this script.
 
-Mapping to 0x00 or U+0000 is also having problem.
-For example, CP20127, Microsoft mapping of ASCII,
-has an entry of 0x80 -> U+0000.  But this entry does
-not occur in outputed table.
+In addition, this script "hardcoded" some aspects of known codepages,
+such as the byte ranges of first and second bytes of multibyte
+codepages.  Therefore it would not be appropriate to use this script
+to reverse engineering unknown multibyte codepages.
 
-In other points, this script has a lot of "hardcoded"
-code, so that making table of some unknown code page
-can result incorrect mapping.
+=head1 SEE ALSO
+
+L<tbl2ucm.pl>.
 
 =head1 AUTHOR
 
-Nanashi-san <nanashi@san.invalid>
+Nanashi-san.
+
+This script is currently maintained by Wakaba <w@suika.fam.cx>.
 
 =head1 LICENSE
 
 Public Domain.
 
 =cut
-
-# $Date: 2002/12/12 07:47:19 $
