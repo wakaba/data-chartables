@@ -7,7 +7,7 @@ TBR2TBL = $(PLDIR)tbr2tbl.pl
 TBL2UCM = $(PLDIR)tbl2ucm.pl
 
 SOURCE_DIR = ./
-RESULT_DIR = ../compound/
+RESULT_DIR = ../generated/
 
 TBL_GEN = $(RESULT_DIR)fullwidth.tbl \
 	  $(RESULT_DIR)cp437-ms-1996.tbl $(RESULT_DIR)cp437-ms-1996.tbl \

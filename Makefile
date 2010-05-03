@@ -6,7 +6,7 @@ TBR2TBL = $(PLDIR)tbr2tbl.pl
 TBL2UCM = $(PLDIR)tbl2ucm.pl
 
 SOURCE_DIR = source/
-RESULT_DIR = compound/
+RESULT_DIR = generated/
 
 TBL_jis = $(RESULT_DIR)jisx0208_1978.tbl $(RESULT_DIR)jisx0208_1978_irv.tbl \
   $(RESULT_DIR)jisx0208_1983.tbl $(RESULT_DIR)jisx0208_1983_irv.tbl $(RESULT_DIR)jisx0208_1990.tbl \
