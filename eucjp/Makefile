@@ -31,14 +31,14 @@ all: \
   $(RESULT_DIR)euc-jp-1997-open-nec.ucm \
   $(RESULT_DIR)euc-jp-sw.ucm \
 
-$(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp: $(GL_JIS_TBR_FILES) \
-  $(TBR_DIR)gl-iso-646-alphanumeric-fw.tbr $(TBR2TBL_PL)
+$(GENERATED_TBR_DIR)euc-jp-1997-cs1-left.tbr: $(GL_JIS_TBR_FILES) \
+  $(TBR_DIR)gl-iso-646-alphanumeric-fw.tbr $(TBR2TBL_PL) Makefile
 	$(ECHO) '#?PETBL/1.0 SOURCE' > $@.tmp
 	$(ECHO) '#?import src="$(TBR_DIR)gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"' >> $@.tmp
 	$(TBR2TBL) $@.tmp > $@
 	$(RM) $@.tmp
 
-$(GENERATED_TBR_DIR)euc-jp-1997.tbr:
+$(GENERATED_TBR_DIR)euc-jp-1997.tbr: Makefile
 	$(ECHO) '#?PETBL/1.0 SOURCE' > $@
 	$(ECHO) '#?o name="euc-jp-1997"' >> $@
 	$(ECHO) '#?o <-ucs-substition="0x30FB"' >> $@
@@ -82,7 +82,7 @@ $(GENERATED_TBR_DIR)euc-jp-1997.tbr:
 	$(PERL_INPLACE) -e 'print unless /^0x8[EF]/' $@
 	$(ECHO) '#?import std-0xA0' >> $@
 	$(ECHO) '#?import std-0xFF' >> $@
-	$(ECHO) '#?import src=".euc-jp-1997-gr-left.tbr.tmp" right' >> $@
+	$(ECHO) '#?import src="euc-jp-1997-cs1-left.tbr" right' >> $@
 	$(ECHO) '0x8EA1	U+FF61		# HALFWIDTH IDEOGRAPHIC FULL STOP' >> $@
 	$(ECHO) '0x8EA2	U+FF62		# HALFWIDTH LEFT CORNER BRACKET' >> $@
 	$(ECHO) '0x8EA3	U+FF63		# HALFWIDTH RIGHT CORNER BRACKET' >> $@
@@ -151,9 +151,8 @@ $(GENERATED_TBR_DIR)euc-jp-1997.tbr:
 $(RESULT_DIR)euc-jp-1997.tbl: $(RESULT_DIR)%.tbl: $(GENERATED_TBR_DIR)%.tbr \
   $(TBR_DIR)gl-iso-646-alphanumeric.tbr $(TBR_DIR)gl-iso-646-symbol.tbr \
   $(TBR_DIR)gl-iso-646-alphanumeric-fw.tbr $(TBR_DIR)gl-jisx0212-common.tbr \
-  $(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp $(TBR2TBL_PL)
+  $(GENERATED_TBR_DIR)euc-jp-1997-cs1-left.tbr $(TBR2TBL_PL)
 	$(TBR2TBL) $< > $@
-	#$(RM) $(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp
 
 $(RESULT_DIR)euc-jp-1997-open-nec.tbl:
 	$(CP) $(TBL_DIR)euc-jp-1997-open-nec.tbl $@.tmp
