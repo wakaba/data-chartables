@@ -1,5 +1,5 @@
 
-PLDIR = ../tool/
+PLDIR = ../bin/
 CP = cp
 PERL = perl
 PERLI = $(PERL) -I$(PLDIR)

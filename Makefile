@@ -1,5 +1,5 @@
 
-PLDIR = tool/
+PLDIR = bin/
 PERL = perl
 PERLI = $(PERL) -I$(PLDIR)
 TBR2TBL = $(PLDIR)tbr2tbl.pl
