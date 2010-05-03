@@ -79,7 +79,6 @@ $(GENERATED_TBR_DIR)euc-jp-1997.tbr: Makefile
 	$(ECHO) '0x9D	U+009D		# <control>' >> $@
 	$(ECHO) '0x9E	U+009E		# <control>' >> $@
 	$(ECHO) '0x9F	U+009F		# <control>' >> $@
-	$(PERL_INPLACE) -e 'print unless /^0x8[EF]/' $@
 	$(ECHO) '#?import std-0xA0' >> $@
 	$(ECHO) '#?import std-0xFF' >> $@
 	$(ECHO) '#?import src="euc-jp-1997-cs1-left.tbr" right' >> $@
