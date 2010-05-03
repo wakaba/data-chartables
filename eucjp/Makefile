@@ -9,8 +9,8 @@ CAT = cat
 
 BIN_DIR = ../bin/
 TBR_DIR = ../source/
+GENERATED_TBR_DIR = ../generated/
 RESULT_DIR = ../generated/
-EUCTBR_DIR = ./
 EUCTBL_DIR = ./
 
 TBR2TBL_PL = $(BIN_DIR)tbr2tbl.pl
@@ -31,14 +31,14 @@ all: \
   $(RESULT_DIR)euc-jp-1997-open-nec.ucm \
   $(RESULT_DIR)euc-jp-sw.ucm \
 
-.euc-jp-1997-gr-left.tbr.tmp: $(GL_JIS_TBR_FILES) \
+$(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp: $(GL_JIS_TBR_FILES) \
   $(TBR_DIR)gl-iso-646-alphanumeric-fw.tbr $(TBR2TBL_PL)
 	$(ECHO) '#?PETBL/1.0 SOURCE' > $@.tmp
 	$(ECHO) '#?import src="$(TBR_DIR)gl-jisx0208-common.tbr" mode="standard,fullwidth,isoiec646irv,NOT-SIGN,LARGE-CIRCLE,nonhan-1983-add,han-1978-revised,han-1983-revised,han-1983-swapped,han-1983-add,han-1990-revised,han-1990-add"' >> $@.tmp
 	$(TBR2TBL) $@.tmp > $@
 	$(RM) $@.tmp
 
-$(EUCTBR_DIR)euc-jp-1997.tbr:
+$(GENERATED_TBR_DIR)euc-jp-1997.tbr:
 	$(ECHO) '#?PETBL/1.0 SOURCE' > $@
 	$(ECHO) '#?o name="euc-jp-1997"' >> $@
 	$(ECHO) '#?o <-ucs-substition="0x30FB"' >> $@
@@ -148,12 +148,12 @@ $(EUCTBR_DIR)euc-jp-1997.tbr:
 	$(ECHO) '0x8EDF	U+FF9F		# HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK' >> $@
 	$(ECHO) '#?import src="$(TBR_DIR)gl-jisx0212-common.tbr" mode="fullwidth,isoiec646irv,BROKEN-BAR,han" offset="0x8F8080"' >> $@
 
-$(RESULT_DIR)euc-jp-1997.tbl: $(RESULT_DIR)%.tbl: $(EUCTBR_DIR)%.tbr \
+$(RESULT_DIR)euc-jp-1997.tbl: $(RESULT_DIR)%.tbl: $(GENERATED_TBR_DIR)%.tbr \
   $(TBR_DIR)gl-iso-646-alphanumeric.tbr $(TBR_DIR)gl-iso-646-symbol.tbr \
   $(TBR_DIR)gl-iso-646-alphanumeric-fw.tbr $(TBR_DIR)gl-jisx0212-common.tbr \
-  .euc-jp-1997-gr-left.tbr.tmp $(TBR2TBL_PL)
+  $(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp $(TBR2TBL_PL)
 	$(TBR2TBL) $< > $@
-	$(RM) .euc-jp-1997-gr-left.tbr.tmp
+	#$(RM) $(GENERATED_TBR_DIR).euc-jp-1997-gr-left.tbr.tmp
 
 $(RESULT_DIR)euc-jp-1997-open-nec.tbl:
 	$(CP) $(TBL_DIR)euc-jp-1997-open-nec.tbl $@.tmp

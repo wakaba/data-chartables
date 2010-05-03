@@ -8,6 +8,7 @@ CP = cp
 
 BIN_DIR = ../bin/
 TBR_DIR = ../source/
+GENERATED_TBR_DIR = ../generated/
 RESULT_DIR = ../generated/
 CPTBR_DIR = ../cp/
 
@@ -21,7 +22,7 @@ all: \
   $(RESULT_DIR)shift-jis-1997.tbl \
   $(RESULT_DIR)shift-jis-1997.ucm
 
-shift-jis-1997.tbr: $(CPTBR_DIR)cp932-ms.tbr
+$(GENERATED_TBR_DIR)shift-jis-1997.tbr: $(CPTBR_DIR)cp932-ms.tbr
 	$(CP) $< $@
 	$(PERL_INPLACE) -e 'print unless /^0x(?:5C|7E|8(?:[07]|1(?:5[CF]|6[01]|7C|9[12]|CA))|A0|F)|<-|->/' $@
 	$(ECHO) '0x5C	U+00A5		# YEN SIGN' >> $@
@@ -39,7 +40,7 @@ shift-jis-1997.tbr: $(CPTBR_DIR)cp932-ms.tbr
 	$(ECHO) '#?o ucm:mb_cur_max="2"' >> $@
 	$(ECHO) '#?o license="Public Domain"' >> $@
 
-$(RESULT_DIR)shift-jis-1997.tbl: $(RESULT_DIR)%.tbl: %.tbr $(TBR2TBL_PL)
+$(RESULT_DIR)shift-jis-1997.tbl: $(RESULT_DIR)%.tbl: $(GENERATED_TBR_DIR)%.tbr $(TBR2TBL_PL)
 	$(TBR2TBL) $< > $@
 
 $(RESULT_DIR)%.ucm: $(RESULT_DIR)%.tbl $(TBL2UCM_PL)

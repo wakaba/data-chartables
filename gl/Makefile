@@ -8,6 +8,7 @@ CP = cp
 
 BIN_DIR = ../bin/
 TBR_DIR = ../source/
+GENERATED_TBR_DIR = ../generated/
 RESULT_DIR = ../generated/
 
 TBR2TBL_PL = $(BIN_DIR)tbr2tbl.pl
@@ -27,13 +28,13 @@ all: \
   $(GENERATED_TBR_FILES:%.tbr=$(RESULT_DIR)%.tbl) \
   $(GENERATED_TBR_FILES:%.tbr=$(RESULT_DIR)%.ucm)
 
-$(RESULT_DIR)%.tbl: %.tbr $(TBR2TBL_PL)
+$(RESULT_DIR)%.tbl: $(GENERATED_TBR_DIR)%.tbr $(TBR2TBL_PL)
 	$(TBR2TBL) $< > $@
 
 $(RESULT_DIR)%.ucm: $(RESULT_DIR)%.tbl $(TBL2UCM_PL)
 	$(TBL2UCM) $< > $@
 
-gl-jis-1997.tbr: $(TBR_DIR)jisx0208_1997.tbr $(GL_JIS_TBR_FILES) \
+$(GENERATED_TBR_DIR)gl-jis-1997.tbr: $(TBR_DIR)jisx0208_1997.tbr $(GL_JIS_TBR_FILES) \
   $(TBR_DIR)gl-iso-646-symbol.tbr $(TBR2TBL_PL)
 	$(TBR2TBL) $< > $@
 	$(PERL_INPLACE) -e 'print unless /^#(?!\?PETBL)/' $@
@@ -42,7 +43,7 @@ gl-jis-1997.tbr: $(TBR_DIR)jisx0208_1997.tbr $(GL_JIS_TBR_FILES) \
 	$(ECHO) '#?o ucm:mb_cur_max="2"' >> $@
 	$(ECHO) '#?o license="Public Domain"' >> $@
 
-gl-jis-1997-swapped.tbr: gl-jis-1997.tbr
+$(GENERATED_TBR_DIR)gl-jis-1997-swapped.tbr: $(GENERATED_TBR_DIR)gl-jis-1997.tbr
 	$(CP) $< $@
 	$(PERL_INPLACE) -e 'print unless /^#(?!\?PETBL)/' $@
 	$(PERL_INPLACE) -e 'print unless /^0x(?:3033|724D|3229|7274|3342|695A|3349|5978|3376|635E|3443|5E75|3452|6B5D|375B|7074|395C|6268|3C49|6922|3F59|7057|4128|6C4D|445B|5464|4557|626A|456E|5B6D|4573|5E39|4676|6D6E|4768|6A24|4930|5B58|4B79|5056|4C79|692E|4F36|6446|3646|4B6A|4D5A|6076|742[1234])/' $@
@@ -103,7 +104,7 @@ gl-jis-1997-swapped.tbr: gl-jis-1997.tbr
 	$(ECHO) '#?o ucm:mb_cur_max="2"' >> $@
 	$(ECHO) '#?o license="Public Domain"' >> $@
 
-gl-jis-1983.tbr: gl-jis-1997.tbr
+$(GENERATED_TBR_DIR)gl-jis-1983.tbr: $(GENERATED_TBR_DIR)gl-jis-1997.tbr
 	$(CP) $< $@
 	$(PERL_INPLACE) -e 'print unless /^#(?!\?PETBL)/' $@
 	$(PERL_INPLACE) -e 'print unless /^0x742[56]/' $@
@@ -112,7 +113,7 @@ gl-jis-1983.tbr: gl-jis-1997.tbr
 	$(ECHO) '#?o ucm:mb_cur_max="2"' >> $@
 	$(ECHO) '#?o license="Public Domain"' >> $@
 
-gl-jis-1978.tbr: gl-jis-1983.tbr
+$(GENERATED_TBR_DIR)gl-jis-1978.tbr: $(GENERATED_TBR_DIR)gl-jis-1983.tbr
 	$(CP) $< $@
 	$(PERL_INPLACE) -e 'print unless /^#(?!\?PETBL)/' $@
 	$(PERL_INPLACE) -e 'print unless /^0x(?:3033|724D|3229|7274|3342|695A|3349|5978|3376|635E|3443|5E75|3452|6B5D|375B|7074|395C|6268|3C49|6922|3F59|7057|4128|6C4D|445B|5464|4557|626A|456E|5B6D|4573|5E39|4676|6D6E|4768|6A24|4930|5B58|4B79|5056|4C79|692E|4F36|6446|3646|4B6A|4D5A|6076)/' $@
